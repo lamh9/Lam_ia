@@ -21,12 +21,12 @@ body {
 
 body {
   font-family: Georgia, "Times New Roman", serif;
-  background: #f3c4c9;
+  background: #f3c6cb;
 }
 
-/* =========================
+/* =========================================
    SCÈNE
-========================= */
+========================================= */
 
 .scene {
   position: relative;
@@ -35,57 +35,35 @@ body {
   overflow: hidden;
 }
 
-/* =========================
+/* =========================================
    PORTE
-========================= */
+========================================= */
 
 .door-scene {
   position: absolute;
   inset: 0;
-  z-index: 20;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
+
   background:
     linear-gradient(
       135deg,
-      #78bfc1 0%,
-      #9fd3cd 48%,
-      #e8b7b9 100%
+      #74b9bd,
+      #a9d5cc 48%,
+      #e8b4bb
     );
+
   transition: opacity 1.5s ease;
-}
-
-.door-decoration {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.flower-left,
-.flower-right {
-  position: absolute;
-  bottom: 7%;
-  font-size: 65px;
-  line-height: 1.1;
-  filter: drop-shadow(0 5px 5px rgba(0,0,0,.15));
-}
-
-.flower-left {
-  left: 3%;
-}
-
-.flower-right {
-  right: 3%;
 }
 
 .door-title {
   position: absolute;
-  top: 11%;
+  top: 10%;
   width: 100%;
   text-align: center;
   color: #304f57;
-  padding: 0 20px;
 }
 
 .door-title h1 {
@@ -103,13 +81,26 @@ body {
   position: relative;
   width: 220px;
   height: 400px;
-  background: linear-gradient(145deg, #a87882, #c18a92);
+
+  background:
+    linear-gradient(
+      145deg,
+      #a87782,
+      #c18c95
+    );
+
   border: 9px solid #654d54;
   border-radius: 8px 8px 0 0;
-  box-shadow: 0 25px 50px rgba(40, 60, 65, .35);
+
+  box-shadow:
+    0 25px 50px rgba(40, 60, 65, .35);
+
   cursor: pointer;
   transform-origin: left center;
-  transition: transform 1.5s ease;
+
+  transition:
+    transform 1.5s ease,
+    opacity 1s ease;
 }
 
 .door-panel {
@@ -117,7 +108,7 @@ body {
   left: 25px;
   right: 25px;
   height: 115px;
-  border: 3px solid rgba(70, 45, 55, .3);
+  border: 3px solid rgba(70,45,55,.3);
 }
 
 .door-panel.top {
@@ -132,10 +123,12 @@ body {
   position: absolute;
   right: 17px;
   top: 50%;
+
   width: 16px;
   height: 16px;
+
   border-radius: 50%;
-  background: #e8c36d;
+  background: #e7c16b;
 }
 
 .open-text {
@@ -143,36 +136,44 @@ body {
   bottom: 18px;
   left: 0;
   width: 100%;
+
   text-align: center;
+
   color: white;
   font-family: Arial, sans-serif;
   font-size: 13px;
 }
 
-/* =========================
+/* =========================================
    STADE
-========================= */
+========================================= */
 
 .tennis-scene {
   position: absolute;
   inset: 0;
+
   opacity: 0;
-  transform: scale(1.08);
-  transition: opacity 2s ease, transform 2s ease;
-  background: #8ebd9c;
+  transform: scale(1.05);
+
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+
+  background: #9bcf9c;
 }
 
 /* ciel */
 
 .sky {
   position: absolute;
-  inset: 0 0 43% 0;
+  inset: 0 0 50% 0;
+
   background:
     linear-gradient(
       to bottom,
-      #77c9d0 0%,
-      #b8dcd1 48%,
-      #f2c6bc 100%
+      #76c7d2 0%,
+      #b8ded4 55%,
+      #f5d49d 100%
     );
 }
 
@@ -180,223 +181,365 @@ body {
 
 .sun {
   position: absolute;
-  width: 95px;
-  height: 95px;
-  right: 12%;
-  top: 12%;
+
+  width: 105px;
+  height: 105px;
+
+  left: 50%;
+  top: 20%;
+
+  transform: translateX(-50%);
+
   border-radius: 50%;
-  background: #ffe4a8;
-  box-shadow: 0 0 55px rgba(255, 224, 165, .85);
+
+  background: #ffe5a9;
+
+  box-shadow:
+    0 0 65px rgba(255,224,165,.9);
 }
 
-/* nuages */
-
-.cloud {
-  position: absolute;
-  color: rgba(255,255,255,.55);
-  font-size: 55px;
-}
-
-.cloud.one {
-  left: 8%;
-  top: 18%;
-}
-
-.cloud.two {
-  right: 32%;
-  top: 27%;
-  font-size: 40px;
-}
-
-/* palmiers */
+/* =========================================
+   PALMIERS
+   Ils sont maintenant derrière le court
+   ========================================= */
 
 .palm {
   position: absolute;
   z-index: 3;
-  font-size: 90px;
-  filter: drop-shadow(0 8px 5px rgba(0,0,0,.15));
+
+  color: #527b43;
+
+  line-height: 1;
 }
 
-.palm.left {
-  left: 0;
-  top: 17%;
+/* palmier gauche */
+
+.palm-left {
+  left: 2%;
+  bottom: 41%;
+  font-size: 110px;
+  transform: rotate(-3deg);
 }
 
-.palm.right {
-  right: 0;
-  top: 15%;
+/* palmier droit */
+
+.palm-right {
+  right: 1%;
+  bottom: 39%;
+  font-size: 125px;
+  transform: rotate(4deg);
 }
 
-/* tribunes */
+/* petits palmiers */
 
-.tribune {
+.palm-small-left {
   position: absolute;
-  left: 5%;
-  right: 5%;
-  top: 30%;
-  height: 17%;
+  left: 20%;
+  bottom: 42%;
+  z-index: 3;
+  font-size: 65px;
+}
+
+.palm-small-right {
+  position: absolute;
+  right: 19%;
+  bottom: 42%;
+  z-index: 3;
+  font-size: 65px;
+}
+
+/* =========================================
+   JARDIN AUTOUR DU COURT
+========================================= */
+
+.garden {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 48%;
+
   z-index: 4;
+
   background:
-    repeating-linear-gradient(
+    linear-gradient(
       to bottom,
-      #496f70 0 13px,
-      #759494 13px 17px
+      #4e914d,
+      #3d7b45
     );
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 10px 20px rgba(30,60,60,.25);
 }
 
-.tribune-top {
+/* bordures fleuries */
+
+.flower-border {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -9px;
-  height: 9px;
-  background: #d99aa5;
-}
-
-/* projecteurs */
-
-.lights {
-  position: absolute;
-  top: 21%;
-  z-index: 5;
-  font-size: 42px;
-  filter: drop-shadow(0 0 8px rgba(255,255,220,.8));
-}
-
-.lights.left {
-  left: 8%;
-}
-
-.lights.right {
-  right: 8%;
-}
-
-/* panneaux */
-
-.sign {
-  position: absolute;
-  top: 36%;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 6;
-  padding: 7px 20px;
-  border-radius: 4px;
-  background: #35696b;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
+
+  color: #e99aa9;
+
+  font-size: 25px;
+
+  letter-spacing: 8px;
+
+  white-space: nowrap;
 }
 
-/* =========================
-   COURT
-========================= */
+.flower-border.top {
+  left: 8%;
+  right: 8%;
+  bottom: 45%;
+  text-align: center;
+}
+
+.flower-border.left {
+  left: 2%;
+  bottom: 8%;
+  writing-mode: vertical-rl;
+}
+
+.flower-border.right {
+  right: 2%;
+  bottom: 8%;
+  writing-mode: vertical-rl;
+}
+
+/* =========================================
+   COURT DE TENNIS
+========================================= */
+
+.court-area {
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+
+  bottom: 0;
+
+  height: 60%;
+
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* vrai court rose */
 
 .court {
   position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -7%;
-  height: 52%;
-  z-index: 7;
+
+  width: 76%;
+  height: 100%;
+
+  bottom: -4%;
+
   background:
     linear-gradient(
-      135deg,
-      #55c3bb,
-      #70cec4
+      to bottom,
+      #ed91a3,
+      #e88b9d
     );
-  transform:
-    perspective(700px)
-    rotateX(45deg);
-  border: 5px solid white;
-  box-shadow: 0 -12px 30px rgba(35,80,75,.25);
+
+  border-left: 7px solid #f8c3ca;
+  border-right: 7px solid #f8c3ca;
+
+  clip-path:
+    polygon(
+      15% 0%,
+      85% 0%,
+      100% 100%,
+      0% 100%
+    );
+
+  box-shadow:
+    0 -10px 30px rgba(80,70,65,.25);
 }
 
-.court::before {
-  content: "";
+/* lignes du terrain */
+
+.court-lines {
   position: absolute;
-  inset: 13%;
-  border: 3px solid rgba(255,255,255,.95);
-}
 
-.court::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 13%;
-  bottom: 13%;
-  width: 3px;
-  background: white;
-}
-
-/* lignes horizontales */
-
-.service-line {
-  position: absolute;
-  left: 13%;
-  right: 13%;
-  top: 50%;
-  height: 3px;
-  background: white;
-}
-
-/* filet */
-
-.net {
-  position: absolute;
   left: 16%;
   right: 16%;
-  bottom: 29%;
-  height: 8px;
-  z-index: 10;
-  background: #eee;
-  box-shadow: 0 5px 8px rgba(0,0,0,.25);
+
+  top: 8%;
+  bottom: 7%;
+
+  border: 4px solid white;
 }
 
-.net::before,
-.net::after {
-  content: "";
+/* ligne centrale */
+
+.center-line {
   position: absolute;
-  top: -30px;
-  width: 6px;
-  height: 38px;
-  background: #444;
-}
 
-.net::before {
-  left: 0;
-}
-
-.net::after {
-  right: 0;
-}
-
-/* =========================
-   JOUEUR PRINCIPAL
-========================= */
-
-.player {
-  position: absolute;
-  z-index: 15;
-}
-
-.main-player {
   left: 50%;
-  bottom: 22%;
+
+  top: 8%;
+  bottom: 7%;
+
+  width: 4px;
+
+  background: white;
+
   transform: translateX(-50%);
 }
 
-/* tête vue de dos */
+/* lignes de service */
+
+.service-top,
+.service-bottom {
+  position: absolute;
+
+  left: 16%;
+  right: 16%;
+
+  height: 4px;
+
+  background: white;
+}
+
+.service-top {
+  top: 38%;
+}
+
+.service-bottom {
+  top: 62%;
+}
+
+/* =========================================
+   FILET
+========================================= */
+
+.net {
+  position: absolute;
+
+  left: 17%;
+  right: 17%;
+
+  top: 50%;
+
+  height: 12px;
+
+  z-index: 20;
+
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,.95) 0 2px,
+      rgba(90,90,90,.35) 2px 5px
+    );
+
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.25);
+}
+
+/* poteaux du filet */
+
+.net-post-left,
+.net-post-right {
+  position: absolute;
+
+  top: -34px;
+
+  width: 7px;
+  height: 45px;
+
+  background: #555;
+
+  z-index: 21;
+}
+
+.net-post-left {
+  left: 0;
+}
+
+.net-post-right {
+  right: 0;
+}
+
+/* =========================================
+   BALLE
+========================================= */
+
+.ball {
+  position: absolute;
+
+  z-index: 22;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: #d8e852;
+
+  box-shadow:
+    0 3px 5px rgba(0,0,0,.2);
+}
+
+.ball.one {
+  right: 29%;
+  bottom: 22%;
+}
+
+.ball.two {
+  left: 28%;
+  bottom: 30%;
+  transform: scale(.65);
+}
+
+/* =========================================
+   JOUEUR PRINCIPAL
+========================================= */
+
+.main-player {
+  position: absolute;
+
+  left: 50%;
+  bottom: 19%;
+
+  transform: translateX(-50%);
+
+  z-index: 30;
+}
+
+/* corps */
+
+.body {
+  position: relative;
+
+  width: 62px;
+  height: 140px;
+
+  background: #293d43;
+
+  border-radius:
+    25px 25px 10px 10px;
+
+  box-shadow:
+    0 10px 16px rgba(0,0,0,.22);
+}
+
+/* tête */
 
 .head {
   position: absolute;
+
   left: 8px;
-  top: -46px;
+  top: -45px;
+
   width: 45px;
   height: 50px;
+
   border-radius: 50%;
+
   background: #a97666;
 }
 
@@ -404,45 +547,48 @@ body {
 
 .hair {
   position: absolute;
-  left: 4px;
-  top: -51px;
+
+  left: 3px;
+  top: -50px;
+
   width: 53px;
   height: 42px;
-  border-radius: 50% 50% 35% 35%;
-  background: #293638;
-}
 
-/* corps */
+  border-radius:
+    50% 50% 35% 35%;
 
-.body {
-  position: relative;
-  width: 62px;
-  height: 140px;
-  border-radius: 24px 24px 10px 10px;
-  background: #283f47;
-  box-shadow: 0 10px 15px rgba(0,0,0,.2);
+  background: #293438;
 }
 
 /* short */
 
 .shorts {
   position: absolute;
-  bottom: 0;
+
   left: -2px;
+  bottom: 0;
+
   width: 66px;
-  height: 42px;
-  border-radius: 0 0 10px 10px;
-  background: #f1f0eb;
+  height: 43px;
+
+  border-radius:
+    0 0 10px 10px;
+
+  background: #f1eee8;
 }
 
 /* bras */
 
 .arm {
   position: absolute;
+
   top: 28px;
+
   width: 18px;
   height: 82px;
+
   border-radius: 15px;
+
   background: #a97666;
 }
 
@@ -460,10 +606,14 @@ body {
 
 .leg {
   position: absolute;
+
   bottom: -65px;
+
   width: 21px;
   height: 70px;
+
   border-radius: 15px;
+
   background: #a97666;
 }
 
@@ -475,96 +625,171 @@ body {
   right: 7px;
 }
 
-/* raquette */
+/* =========================================
+   RAQUETTE
+========================================= */
 
 .racket {
   position: absolute;
+
   right: -83px;
   top: 38px;
+
   width: 80px;
   height: 125px;
+
   transform: rotate(14deg);
 }
 
 .racket-head {
   position: absolute;
+
   left: 4px;
   top: 0;
+
   width: 58px;
   height: 75px;
+
   border: 5px solid #f4e6cd;
+
   border-radius: 50%;
 }
 
 .racket-head::after {
   content: "";
+
   position: absolute;
+
   inset: 8px;
+
   border: 2px solid rgba(255,255,255,.8);
+
   border-radius: 50%;
 }
 
 .racket-handle {
   position: absolute;
+
   left: 34px;
   top: 66px;
+
   width: 8px;
   height: 58px;
+
   border-radius: 4px;
+
   background: #70564d;
+
   transform: rotate(-15deg);
 }
 
-/* joueurs au loin */
+/* =========================================
+   JOUEURS AU LOIN
+========================================= */
 
-.small-player {
-  transform: scale(.45);
+.far-player {
+  position: absolute;
+
+  z-index: 25;
+
+  transform: scale(.38);
+
   opacity: .85;
 }
 
-.small-player.one {
-  left: 25%;
-  bottom: 39%;
+.far-player.left {
+  left: 24%;
+  top: 20%;
 }
 
-.small-player.two {
+.far-player.right {
   right: 24%;
-  bottom: 41%;
+  top: 20%;
 }
 
-/* =========================
+/* =========================================
+   PANNEAU TENNIS CLUB
+========================================= */
+
+.club-sign {
+  position: absolute;
+
+  top: 12%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 12;
+
+  padding: 8px 20px;
+
+  background: #477b69;
+
+  color: white;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  border-radius: 3px;
+}
+
+/* =========================================
    DIALOGUE
-========================= */
+========================================= */
 
 .dialogue {
   position: absolute;
+
   left: 50%;
-  bottom: 5%;
+  bottom: 4%;
+
   width: min(90%, 500px);
-  transform: translateX(-50%) translateY(30px);
-  z-index: 25;
+
+  transform:
+    translateX(-50%)
+    translateY(30px);
+
+  z-index: 40;
+
   opacity: 0;
+
   transition: 1.2s ease;
 }
 
 .bubble {
   position: relative;
+
   padding: 17px 20px;
-  border-radius: 24px;
+
   background: rgba(255,255,255,.96);
-  color: #365b63;
+
+  border-radius: 25px;
+
   text-align: center;
+
+  color: #365b63;
+
   font-size: 17px;
+
   line-height: 1.4;
-  box-shadow: 0 12px 30px rgba(30,70,70,.25);
+
+  box-shadow:
+    0 12px 30px rgba(30,70,70,.25);
 }
 
 .bubble::after {
   content: "";
+
   position: absolute;
+
   left: 50%;
   bottom: -17px;
+
   transform: translateX(-50%);
+
   border-left: 17px solid transparent;
   border-right: 17px solid transparent;
   border-top: 20px solid white;
@@ -574,59 +799,93 @@ body {
 
 .choices {
   display: flex;
+
   flex-direction: column;
+
   gap: 10px;
+
   margin-top: 20px;
 }
 
 .choice {
   width: 100%;
-  border: 2px solid rgba(255,255,255,.9);
-  border-radius: 30px;
+
   padding: 12px 18px;
+
+  border-radius: 30px;
+
+  border: 2px solid white;
+
   cursor: pointer;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 15px;
+
   color: #3e6268;
-  background: #f4c8d0;
-  box-shadow: 0 7px 18px rgba(40,70,70,.18);
+
+  background: #f3c3cc;
+
+  box-shadow:
+    0 7px 18px rgba(40,70,70,.18);
+
   transition: .25s ease;
 }
 
 .choice:nth-child(2) {
-  background: #d4eeee;
+  background: #c8e3da;
 }
 
 .choice:hover {
   transform: translateY(-3px);
 }
 
-/* =========================
+/* =========================================
    RÉPONSE
-========================= */
+========================================= */
 
 .answer {
   position: absolute;
+
   inset: 0;
-  z-index: 40;
+
+  z-index: 100;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   padding: 25px;
-  background: rgba(49,89,91,.35);
+
+  background:
+    rgba(45,75,70,.38);
+
   opacity: 0;
+
   pointer-events: none;
+
   transition: 1s ease;
 }
 
 .answer-box {
   width: min(90%, 430px);
+
   padding: 30px 23px;
+
   border-radius: 28px;
-  background: rgba(255,255,255,.96);
+
+  background: rgba(255,255,255,.97);
+
   text-align: center;
+
   color: #365b63;
-  box-shadow: 0 20px 50px rgba(30,70,70,.3);
+
+  box-shadow:
+    0 20px 50px rgba(30,70,70,.3);
 }
 
 .answer-box p {
@@ -636,18 +895,25 @@ body {
 
 .close-answer {
   margin-top: 25px;
+
   padding: 11px 22px;
+
   border: none;
+
   border-radius: 25px;
-  background: #65b7b5;
+
+  background: #65aaa1;
+
   color: white;
+
   cursor: pointer;
+
   font-size: 14px;
 }
 
-/* =========================
-   OUVERTURE
-========================= */
+/* =========================================
+   ANIMATION
+========================================= */
 
 .scene.open .door-scene {
   opacity: 0;
@@ -667,21 +933,27 @@ body {
 
 .scene.open .dialogue {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
 
-/* réponse */
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
 
 .scene.show-answer .answer {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media (max-width: 600px) {
+
+  .door {
+    width: 190px;
+    height: 360px;
+  }
 
   .door-title h1 {
     font-size: 24px;
@@ -691,34 +963,27 @@ body {
     font-size: 13px;
   }
 
-  .door {
-    width: 190px;
-    height: 360px;
+  .palm-left {
+    font-size: 75px;
+    left: -5%;
   }
 
-  .flower-left,
-  .flower-right {
+  .palm-right {
+    font-size: 85px;
+    right: -7%;
+  }
+
+  .palm-small-left,
+  .palm-small-right {
     font-size: 45px;
   }
 
-  .palm {
-    font-size: 65px;
-  }
-
-  .tribune {
-    top: 31%;
-    left: 2%;
-    right: 2%;
-  }
-
   .court {
-    left: 1%;
-    right: 1%;
-    width: 98%;
+    width: 88%;
   }
 
-  .main-player {
-    bottom: 24%;
+  .dialogue {
+    bottom: 3%;
   }
 
   .bubble {
@@ -736,21 +1001,18 @@ body {
 
 <div class="scene" id="scene">
 
-  <!-- =====================
+  <!-- =====================================
        PORTE
-  ====================== -->
+  ====================================== -->
 
-  <div class="door-scene" id="doorScene">
+  <div class="door-scene">
 
     <div class="door-title">
       <h1>Tu veux entrer ?</h1>
       <p>Alors ouvre la porte...</p>
     </div>
 
-    <div class="flower-left">🌿🌸</div>
-    <div class="flower-right">🌸🌿</div>
-
-    <div class="door" id="door">
+    <div class="door">
 
       <div class="door-panel top"></div>
       <div class="door-panel bottom"></div>
@@ -766,9 +1028,9 @@ body {
   </div>
 
 
-  <!-- =====================
+  <!-- =====================================
        STADE
-  ====================== -->
+  ====================================== -->
 
   <div class="tennis-scene">
 
@@ -776,89 +1038,161 @@ body {
 
     <div class="sun"></div>
 
-    <div class="cloud one">☁</div>
-    <div class="cloud two">☁</div>
+    <!-- végétation -->
 
-    <div class="palm left">🌴</div>
-    <div class="palm right">🌴</div>
+    <div class="palm palm-left">🌴</div>
+    <div class="palm palm-right">🌴</div>
 
-    <div class="tribune">
-      <div class="tribune-top"></div>
+    <div class="palm-small-left">🌴</div>
+    <div class="palm-small-right">🌴</div>
+
+    <div class="garden"></div>
+
+    <!-- fleurs -->
+
+    <div class="flower-border top">
+      🌸 🌿 🌸 🌿 🌸 🌿 🌸 🌿 🌸
     </div>
 
-    <div class="lights left">▦</div>
-    <div class="lights right">▦</div>
+    <div class="flower-border left">
+      🌸 🌿 🌸 🌿 🌸 🌿
+    </div>
 
-    <div class="sign">
+    <div class="flower-border right">
+      🌿 🌸 🌿 🌸 🌿 🌸
+    </div>
+
+    <!-- panneau -->
+
+    <div class="club-sign">
       TENNIS CLUB
     </div>
 
 
     <!-- COURT -->
 
-    <div class="court">
-      <div class="service-line"></div>
-    </div>
+    <div class="court-area">
 
-    <div class="net"></div>
+      <div class="court">
 
+        <div class="court-lines"></div>
 
-    <!-- JOUEUR PRINCIPAL -->
+        <div class="center-line"></div>
 
-    <div class="player main-player">
-
-      <div class="body">
-
-        <div class="head"></div>
-        <div class="hair"></div>
-
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-
-        <div class="shorts"></div>
-
-        <div class="leg left"></div>
-        <div class="leg right"></div>
+        <div class="service-top"></div>
+        <div class="service-bottom"></div>
 
       </div>
 
-      <div class="racket">
-        <div class="racket-head"></div>
-        <div class="racket-handle"></div>
+      <!-- filet -->
+
+      <div class="net">
+        <div class="net-post-left"></div>
+        <div class="net-post-right"></div>
+      </div>
+
+      <!-- balles -->
+
+      <div class="ball one"></div>
+      <div class="ball two"></div>
+
+
+      <!-- joueur principal -->
+
+      <div class="main-player">
+
+        <div class="body">
+
+          <div class="head"></div>
+          <div class="hair"></div>
+
+          <div class="shorts"></div>
+
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+        </div>
+
+        <div class="racket">
+
+          <div class="racket-head"></div>
+          <div class="racket-handle"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- joueur loin gauche -->
+
+      <div class="far-player left">
+
+        <div class="body">
+
+          <div class="head"></div>
+          <div class="hair"></div>
+
+          <div class="shorts"></div>
+
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- joueur loin droite -->
+
+      <div class="far-player right">
+
+        <div class="body">
+
+          <div class="head"></div>
+          <div class="hair"></div>
+
+          <div class="shorts"></div>
+
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+        </div>
+
       </div>
 
     </div>
 
 
-    <!-- JOUEUR AU LOIN 1 -->
+    <!-- =====================================
+         DIALOGUE
+    ====================================== -->
 
-    <div class="player small-player one">
+    <div class="dialogue">
 
-      <div class="body">
-        <div class="head"></div>
-        <div class="hair"></div>
-        <div class="shorts"></div>
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
+      <div class="bubble">
+        Bon… maintenant que t’es là…<br>
+        qu’est-ce que tu cherches ?
       </div>
 
-    </div>
+      <div class="choices">
 
+        <button class="choice" onclick="showAnswer(1)">
+          ♡ Peut-être toi.
+        </button>
 
-    <!-- JOUEUR AU LOIN 2 -->
+        <button class="choice" onclick="showAnswer(2)">
+          🎾 Je regardais juste le match... (espionnage 🙂)
+        </button>
 
-    <div class="player small-player two">
-
-      <div class="body">
-        <div class="head"></div>
-        <div class="hair"></div>
-        <div class="shorts"></div>
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
       </div>
 
     </div>
@@ -866,35 +1200,9 @@ body {
   </div>
 
 
-  <!-- =====================
-       DIALOGUE
-  ====================== -->
-
-  <div class="dialogue">
-
-    <div class="bubble">
-      Bon… maintenant que t’es là…<br>
-      qu’est-ce que tu cherches ?
-    </div>
-
-    <div class="choices">
-
-      <button class="choice" onclick="showAnswer(1)">
-        ♡ Peut-être toi.
-      </button>
-
-      <button class="choice" onclick="showAnswer(2)">
-        🎾 Je regardais juste le match... (espionnage 🙂)
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================
-       RÉPONSE
-  ====================== -->
+  <!-- =====================================
+       RÉPONSES
+  ====================================== -->
 
   <div class="answer" id="answer">
 
@@ -916,7 +1224,7 @@ body {
 <script>
 
 const scene = document.getElementById("scene");
-const door = document.getElementById("door");
+const door = document.querySelector(".door");
 const answerText = document.getElementById("answerText");
 
 door.addEventListener("click", function () {
