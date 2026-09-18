@@ -6,683 +6,731 @@
 <title>Lam_ia 🎾</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-body{
-  font-family:Georgia,"Times New Roman",serif;
-  background:#8ed4dc;
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f3c4c9;
 }
 
 /* =========================
-   SCÈNE PRINCIPALE
+   SCÈNE
 ========================= */
 
-.scene{
-  position:relative;
-  width:100%;
-  height:100vh;
-  overflow:hidden;
-  background:
-    linear-gradient(135deg,#9bdde3,#d5eeee,#efd6df);
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* =========================
    PORTE
 ========================= */
 
-.message{
-  position:absolute;
-  top:11%;
-  left:0;
-  width:100%;
-  text-align:center;
-  z-index:20;
-  color:#355a64;
-  transition:1s ease;
-}
-
-.message h1{
-  font-size:29px;
-  margin-bottom:8px;
-}
-
-.message p{
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  opacity:.75;
-}
-
-.door{
-  position:absolute;
-  width:220px;
-  height:410px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:linear-gradient(145deg,#a97582,#bd8995);
-  border:10px solid #624b54;
-  border-radius:9px 9px 0 0;
-  cursor:pointer;
-  z-index:15;
-  transform-origin:left center;
-  box-shadow:0 25px 55px rgba(30,65,70,.35);
-  transition:transform 1.4s ease,opacity 1s ease;
-}
-
-.door:hover{
-  transform:translate(-50%,-50%) scale(1.015);
-}
-
-.door::before,
-.door::after{
-  content:"";
-  position:absolute;
-  left:24px;
-  right:24px;
-  height:115px;
-  border:3px solid rgba(75,48,57,.3);
-}
-
-.door::before{
-  top:34px;
-}
-
-.door::after{
-  bottom:34px;
-}
-
-.handle{
-  position:absolute;
-  right:17px;
-  top:50%;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:#e9c66d;
-  box-shadow:0 0 0 4px rgba(0,0,0,.08);
-}
-
-.door-text{
-  position:absolute;
-  bottom:17px;
-  width:100%;
-  text-align:center;
-  color:white;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  letter-spacing:1px;
-}
-
-/* =========================
-   LUMIÈRE
-========================= */
-
-.glow{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:500px;
-  height:700px;
-  transform:translate(-50%,-50%);
+.door-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background:
-    radial-gradient(
-      ellipse,
-      rgba(255,205,228,.95) 0%,
-      rgba(182,235,238,.7) 35%,
-      transparent 72%
+    linear-gradient(
+      135deg,
+      #78bfc1 0%,
+      #9fd3cd 48%,
+      #e8b7b9 100%
     );
-  opacity:0;
-  z-index:4;
-  pointer-events:none;
-  transition:opacity 2s ease;
+  transition: opacity 1.5s ease;
+}
+
+.door-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flower-left,
+.flower-right {
+  position: absolute;
+  bottom: 7%;
+  font-size: 65px;
+  line-height: 1.1;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,.15));
+}
+
+.flower-left {
+  left: 3%;
+}
+
+.flower-right {
+  right: 3%;
+}
+
+.door-title {
+  position: absolute;
+  top: 11%;
+  width: 100%;
+  text-align: center;
+  color: #304f57;
+  padding: 0 20px;
+}
+
+.door-title h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.door-title p {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  opacity: .8;
+}
+
+.door {
+  position: relative;
+  width: 220px;
+  height: 400px;
+  background: linear-gradient(145deg, #a87882, #c18a92);
+  border: 9px solid #654d54;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 25px 50px rgba(40, 60, 65, .35);
+  cursor: pointer;
+  transform-origin: left center;
+  transition: transform 1.5s ease;
+}
+
+.door-panel {
+  position: absolute;
+  left: 25px;
+  right: 25px;
+  height: 115px;
+  border: 3px solid rgba(70, 45, 55, .3);
+}
+
+.door-panel.top {
+  top: 30px;
+}
+
+.door-panel.bottom {
+  bottom: 30px;
+}
+
+.handle {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e8c36d;
+}
+
+.open-text {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
 }
 
 /* =========================
    STADE
 ========================= */
 
-.stadium{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  transform:scale(1.12);
-  transition:opacity 2.2s ease,transform 2.2s ease;
-  z-index:2;
-  background:#76bfc2;
+.tennis-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 2s ease, transform 2s ease;
+  background: #8ebd9c;
 }
 
 /* ciel */
 
-.sky{
-  position:absolute;
-  inset:0 0 42% 0;
+.sky {
+  position: absolute;
+  inset: 0 0 43% 0;
   background:
     linear-gradient(
       to bottom,
-      #67c5d0,
-      #a7dfe1 55%,
-      #efd7d9
+      #77c9d0 0%,
+      #b8dcd1 48%,
+      #f2c6bc 100%
     );
 }
 
 /* soleil */
 
-.sun{
-  position:absolute;
-  width:95px;
-  height:95px;
-  right:13%;
-  top:12%;
-  border-radius:50%;
-  background:#ffe6ae;
-  box-shadow:0 0 60px rgba(255,231,176,.8);
+.sun {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  right: 12%;
+  top: 12%;
+  border-radius: 50%;
+  background: #ffe4a8;
+  box-shadow: 0 0 55px rgba(255, 224, 165, .85);
 }
 
 /* nuages */
 
-.cloud{
-  position:absolute;
-  color:rgba(255,255,255,.55);
-  font-size:60px;
+.cloud {
+  position: absolute;
+  color: rgba(255,255,255,.55);
+  font-size: 55px;
 }
 
-.cloud.one{
-  top:12%;
-  left:10%;
+.cloud.one {
+  left: 8%;
+  top: 18%;
 }
 
-.cloud.two{
-  top:25%;
-  right:28%;
-  font-size:45px;
-}
-
-/* végétation */
-
-.garden{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:25%;
-  height:18%;
-  background:
-    linear-gradient(
-      to top,
-      #438f7e,
-      #72b89e
-    );
+.cloud.two {
+  right: 32%;
+  top: 27%;
+  font-size: 40px;
 }
 
 /* palmiers */
 
-.palm{
-  position:absolute;
-  z-index:4;
-  font-size:95px;
-  filter:drop-shadow(0 8px 5px rgba(0,0,0,.15));
+.palm {
+  position: absolute;
+  z-index: 3;
+  font-size: 90px;
+  filter: drop-shadow(0 8px 5px rgba(0,0,0,.15));
 }
 
-.palm.left{
-  left:2%;
-  top:16%;
+.palm.left {
+  left: 0;
+  top: 17%;
 }
 
-.palm.right{
-  right:1%;
-  top:18%;
+.palm.right {
+  right: 0;
+  top: 15%;
+}
+
+/* tribunes */
+
+.tribune {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 30%;
+  height: 17%;
+  z-index: 4;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #496f70 0 13px,
+      #759494 13px 17px
+    );
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 10px 20px rgba(30,60,60,.25);
+}
+
+.tribune-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9px;
+  height: 9px;
+  background: #d99aa5;
+}
+
+/* projecteurs */
+
+.lights {
+  position: absolute;
+  top: 21%;
+  z-index: 5;
+  font-size: 42px;
+  filter: drop-shadow(0 0 8px rgba(255,255,220,.8));
+}
+
+.lights.left {
+  left: 8%;
+}
+
+.lights.right {
+  right: 8%;
+}
+
+/* panneaux */
+
+.sign {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  padding: 7px 20px;
+  border-radius: 4px;
+  background: #35696b;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
 /* =========================
    COURT
 ========================= */
 
-.court{
-  position:absolute;
-  width:82%;
-  height:52%;
-  left:9%;
-  bottom:-9%;
+.court {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -7%;
+  height: 52%;
+  z-index: 7;
   background:
     linear-gradient(
       135deg,
-      #35b9c0,
-      #66d1d0
+      #55c3bb,
+      #70cec4
     );
   transform:
-    perspective(650px)
-    rotateX(48deg);
-  border:5px solid rgba(255,255,255,.9);
-  box-shadow:
-    0 -15px 35px rgba(25,90,95,.3);
-  z-index:5;
+    perspective(700px)
+    rotateX(45deg);
+  border: 5px solid white;
+  box-shadow: 0 -12px 30px rgba(35,80,75,.25);
 }
 
-.court-lines{
-  position:absolute;
-  inset:14%;
-  border:3px solid rgba(255,255,255,.85);
+.court::before {
+  content: "";
+  position: absolute;
+  inset: 13%;
+  border: 3px solid rgba(255,255,255,.95);
 }
 
-.court-lines::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  bottom:0;
-  width:3px;
-  background:white;
+.court::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 13%;
+  bottom: 13%;
+  width: 3px;
+  background: white;
 }
 
-.court-lines::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:50%;
-  height:3px;
-  background:white;
+/* lignes horizontales */
+
+.service-line {
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  top: 50%;
+  height: 3px;
+  background: white;
 }
 
 /* filet */
 
-.net{
-  position:absolute;
-  width:67%;
-  left:16.5%;
-  bottom:29%;
-  height:7px;
-  background:white;
-  z-index:8;
-  box-shadow:0 5px 8px rgba(0,0,0,.25);
+.net {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 29%;
+  height: 8px;
+  z-index: 10;
+  background: #eee;
+  box-shadow: 0 5px 8px rgba(0,0,0,.25);
+}
+
+.net::before,
+.net::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  width: 6px;
+  height: 38px;
+  background: #444;
+}
+
+.net::before {
+  left: 0;
+}
+
+.net::after {
+  right: 0;
 }
 
 /* =========================
-   JOUEURS
+   JOUEUR PRINCIPAL
 ========================= */
 
-.player{
-  position:absolute;
-  z-index:10;
+.player {
+  position: absolute;
+  z-index: 15;
 }
 
-/* joueur principal */
-
-.main-player{
-  left:50%;
-  bottom:23%;
-  transform:translateX(-50%);
-}
-
-/* corps */
-
-.body{
-  position:relative;
-  width:57px;
-  height:135px;
-  background:#f4f4f1;
-  border-radius:25px 25px 12px 12px;
-  box-shadow:0 8px 15px rgba(0,0,0,.18);
+.main-player {
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
 }
 
 /* tête vue de dos */
 
-.head{
-  position:absolute;
-  width:45px;
-  height:50px;
-  left:6px;
-  top:-42px;
-  border-radius:50%;
-  background:#ad7867;
+.head {
+  position: absolute;
+  left: 8px;
+  top: -46px;
+  width: 45px;
+  height: 50px;
+  border-radius: 50%;
+  background: #a97666;
 }
 
-/* cheveux couvrant l'arrière */
+/* cheveux */
 
-.hair{
-  position:absolute;
-  width:49px;
-  height:39px;
-  left:4px;
-  top:-46px;
-  border-radius:50% 50% 35% 35%;
-  background:#25383c;
+.hair {
+  position: absolute;
+  left: 4px;
+  top: -51px;
+  width: 53px;
+  height: 42px;
+  border-radius: 50% 50% 35% 35%;
+  background: #293638;
 }
 
-/* jambes */
+/* corps */
 
-.leg{
-  position:absolute;
-  width:20px;
-  height:70px;
-  background:#ad7867;
-  bottom:-63px;
-  border-radius:15px;
-}
-
-.leg.left{
-  left:5px;
-  transform:rotate(4deg);
-}
-
-.leg.right{
-  right:5px;
-  transform:rotate(-4deg);
+.body {
+  position: relative;
+  width: 62px;
+  height: 140px;
+  border-radius: 24px 24px 10px 10px;
+  background: #283f47;
+  box-shadow: 0 10px 15px rgba(0,0,0,.2);
 }
 
 /* short */
 
-.shorts{
-  position:absolute;
-  width:60px;
-  height:40px;
-  bottom:0;
-  left:-2px;
-  background:#263f49;
-  border-radius:0 0 10px 10px;
+.shorts {
+  position: absolute;
+  bottom: 0;
+  left: -2px;
+  width: 66px;
+  height: 42px;
+  border-radius: 0 0 10px 10px;
+  background: #f1f0eb;
 }
 
 /* bras */
 
-.arm{
-  position:absolute;
-  width:18px;
-  height:78px;
-  background:#ad7867;
-  border-radius:15px;
-  top:25px;
+.arm {
+  position: absolute;
+  top: 28px;
+  width: 18px;
+  height: 82px;
+  border-radius: 15px;
+  background: #a97666;
 }
 
-.arm.left{
-  left:-10px;
-  transform:rotate(18deg);
+.arm.left {
+  left: -11px;
+  transform: rotate(15deg);
 }
 
-.arm.right{
-  right:-10px;
-  transform:rotate(-25deg);
+.arm.right {
+  right: -11px;
+  transform: rotate(-20deg);
+}
+
+/* jambes */
+
+.leg {
+  position: absolute;
+  bottom: -65px;
+  width: 21px;
+  height: 70px;
+  border-radius: 15px;
+  background: #a97666;
+}
+
+.leg.left {
+  left: 7px;
+}
+
+.leg.right {
+  right: 7px;
 }
 
 /* raquette */
 
-.racket{
-  position:absolute;
-  right:-88px;
-  top:32px;
-  width:80px;
-  height:125px;
-  transform:rotate(15deg);
+.racket {
+  position: absolute;
+  right: -83px;
+  top: 38px;
+  width: 80px;
+  height: 125px;
+  transform: rotate(14deg);
 }
 
-.racket-head{
-  position:absolute;
-  width:59px;
-  height:76px;
-  border:5px solid #f4e6cf;
-  border-radius:50%;
-  left:4px;
-  top:0;
+.racket-head {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 58px;
+  height: 75px;
+  border: 5px solid #f4e6cd;
+  border-radius: 50%;
 }
 
-.racket-head::after{
-  content:"";
-  position:absolute;
-  inset:7px;
-  border:2px solid rgba(255,255,255,.7);
-  border-radius:50%;
+.racket-head::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px solid rgba(255,255,255,.8);
+  border-radius: 50%;
 }
 
-.racket-handle{
-  position:absolute;
-  width:8px;
-  height:55px;
-  background:#745d55;
-  left:34px;
-  top:67px;
-  transform:rotate(-15deg);
-  border-radius:4px;
+.racket-handle {
+  position: absolute;
+  left: 34px;
+  top: 66px;
+  width: 8px;
+  height: 58px;
+  border-radius: 4px;
+  background: #70564d;
+  transform: rotate(-15deg);
 }
 
-/* joueurs arrière */
+/* joueurs au loin */
 
-.back-player{
-  transform:scale(.55);
-  opacity:.8;
+.small-player {
+  transform: scale(.45);
+  opacity: .85;
 }
 
-.back-one{
-  left:20%;
-  bottom:34%;
+.small-player.one {
+  left: 25%;
+  bottom: 39%;
 }
 
-.back-two{
-  right:19%;
-  bottom:36%;
+.small-player.two {
+  right: 24%;
+  bottom: 41%;
 }
 
 /* =========================
    DIALOGUE
 ========================= */
 
-.dialogue{
-  position:absolute;
-  z-index:30;
-  left:50%;
-  bottom:7%;
-  transform:translateX(-50%) translateY(30px);
-  width:min(88%,520px);
-  opacity:0;
-  transition:1.2s ease;
+.dialogue {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  width: min(90%, 500px);
+  transform: translateX(-50%) translateY(30px);
+  z-index: 25;
+  opacity: 0;
+  transition: 1.2s ease;
 }
 
-.bubble{
-  position:relative;
-  background:rgba(255,255,255,.94);
-  border-radius:25px;
-  padding:18px 20px;
-  box-shadow:0 12px 30px rgba(25,70,75,.22);
-  color:#315762;
-  text-align:center;
-  font-size:17px;
-  line-height:1.4;
+.bubble {
+  position: relative;
+  padding: 17px 20px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.96);
+  color: #365b63;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.4;
+  box-shadow: 0 12px 30px rgba(30,70,70,.25);
 }
 
-.bubble::after{
-  content:"";
-  position:absolute;
-  bottom:-17px;
-  left:50%;
-  transform:translateX(-50%);
-  border-left:17px solid transparent;
-  border-right:17px solid transparent;
-  border-top:20px solid rgba(255,255,255,.94);
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -17px;
+  transform: translateX(-50%);
+  border-left: 17px solid transparent;
+  border-right: 17px solid transparent;
+  border-top: 20px solid white;
 }
 
-.choices{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:20px;
-  flex-wrap:wrap;
+/* choix */
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.choice{
-  border:none;
-  cursor:pointer;
-  padding:12px 17px;
-  border-radius:30px;
-  background:rgba(255,255,255,.95);
-  color:#41666e;
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  box-shadow:0 7px 18px rgba(25,70,75,.2);
-  transition:.25s ease;
+.choice {
+  width: 100%;
+  border: 2px solid rgba(255,255,255,.9);
+  border-radius: 30px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  color: #3e6268;
+  background: #f4c8d0;
+  box-shadow: 0 7px 18px rgba(40,70,70,.18);
+  transition: .25s ease;
 }
 
-.choice:hover{
-  transform:translateY(-3px);
+.choice:nth-child(2) {
+  background: #d4eeee;
+}
+
+.choice:hover {
+  transform: translateY(-3px);
 }
 
 /* =========================
    RÉPONSE
 ========================= */
 
-.response{
-  position:absolute;
-  inset:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(87,181,190,.94),
-      rgba(236,207,217,.96)
-    );
-  opacity:0;
-  pointer-events:none;
-  transition:1s ease;
+.answer {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: rgba(49,89,91,.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: 1s ease;
 }
 
-.response-box{
-  width:min(90%,430px);
-  background:rgba(255,255,255,.94);
-  border-radius:30px;
-  padding:35px 25px;
-  text-align:center;
-  color:#355b64;
-  box-shadow:0 20px 50px rgba(30,70,75,.25);
+.answer-box {
+  width: min(90%, 430px);
+  padding: 30px 23px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.96);
+  text-align: center;
+  color: #365b63;
+  box-shadow: 0 20px 50px rgba(30,70,70,.3);
 }
 
-.response-box h2{
-  font-size:25px;
-  margin-bottom:15px;
+.answer-box p {
+  font-size: 20px;
+  line-height: 1.5;
 }
 
-.response-box p{
-  font-family:Arial,sans-serif;
-  line-height:1.6;
-  font-size:14px;
-}
-
-.restart{
-  margin-top:25px;
-  padding:12px 22px;
-  border:0;
-  border-radius:25px;
-  cursor:pointer;
-  background:#4caeb5;
-  color:white;
-  font-size:14px;
+.close-answer {
+  margin-top: 25px;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 25px;
+  background: #65b7b5;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 /* =========================
-   ANIMATION APRÈS OUVERTURE
+   OUVERTURE
 ========================= */
 
-.scene.open .door{
+.scene.open .door-scene {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scene.open .door {
   transform:
-    translate(-50%,-50%)
     perspective(900px)
     rotateY(-82deg);
-  opacity:0;
-  pointer-events:none;
 }
 
-.scene.open .message{
-  opacity:0;
-  transform:translateY(-25px);
+.scene.open .tennis-scene {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.scene.open .glow{
-  opacity:1;
+.scene.open .dialogue {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.scene.open .stadium{
-  opacity:1;
-  transform:scale(1);
-}
+/* réponse */
 
-.scene.open .dialogue{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-/* réponse visible */
-
-.scene.show-response .response{
-  opacity:1;
-  pointer-events:auto;
+.scene.show-answer .answer {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:600px){
+@media (max-width: 600px) {
 
-  .door{
-    width:190px;
-    height:360px;
+  .door-title h1 {
+    font-size: 24px;
   }
 
-  .message h1{
-    font-size:24px;
+  .door-title p {
+    font-size: 13px;
   }
 
-  .message p{
-    font-size:13px;
+  .door {
+    width: 190px;
+    height: 360px;
   }
 
-  .palm{
-    font-size:65px;
+  .flower-left,
+  .flower-right {
+    font-size: 45px;
   }
 
-  .palm.left{
-    top:20%;
+  .palm {
+    font-size: 65px;
   }
 
-  .palm.right{
-    top:23%;
+  .tribune {
+    top: 31%;
+    left: 2%;
+    right: 2%;
   }
 
-  .court{
-    width:110%;
-    left:-5%;
+  .court {
+    left: 1%;
+    right: 1%;
+    width: 98%;
   }
 
-  .main-player{
-    bottom:25%;
+  .main-player {
+    bottom: 24%;
   }
 
-  .dialogue{
-    bottom:5%;
+  .bubble {
+    font-size: 15px;
   }
 
-  .bubble{
-    font-size:15px;
-    padding:15px;
-  }
-
-  .choice{
-    font-size:12px;
-    padding:10px 13px;
+  .choice {
+    font-size: 14px;
   }
 }
 </style>
 </head>
-
 
 <body>
 
@@ -692,16 +740,29 @@ body{
        PORTE
   ====================== -->
 
-  <div class="message">
-    <h1>Tu veux entrer ?</h1>
-    <p>Alors ouvre la porte...</p>
-  </div>
+  <div class="door-scene" id="doorScene">
 
-  <div class="glow"></div>
+    <div class="door-title">
+      <h1>Tu veux entrer ?</h1>
+      <p>Alors ouvre la porte...</p>
+    </div>
 
-  <div class="door" id="door">
-    <div class="handle"></div>
-    <div class="door-text">✦ clique ici ✦</div>
+    <div class="flower-left">🌿🌸</div>
+    <div class="flower-right">🌸🌿</div>
+
+    <div class="door" id="door">
+
+      <div class="door-panel top"></div>
+      <div class="door-panel bottom"></div>
+
+      <div class="handle"></div>
+
+      <div class="open-text">
+        Clique ici
+      </div>
+
+    </div>
+
   </div>
 
 
@@ -709,7 +770,7 @@ body{
        STADE
   ====================== -->
 
-  <div class="stadium">
+  <div class="tennis-scene">
 
     <div class="sky"></div>
 
@@ -721,16 +782,28 @@ body{
     <div class="palm left">🌴</div>
     <div class="palm right">🌴</div>
 
-    <div class="garden"></div>
+    <div class="tribune">
+      <div class="tribune-top"></div>
+    </div>
+
+    <div class="lights left">▦</div>
+    <div class="lights right">▦</div>
+
+    <div class="sign">
+      TENNIS CLUB
+    </div>
+
+
+    <!-- COURT -->
 
     <div class="court">
-      <div class="court-lines"></div>
+      <div class="service-line"></div>
     </div>
 
     <div class="net"></div>
 
 
-    <!-- joueur principal -->
+    <!-- JOUEUR PRINCIPAL -->
 
     <div class="player main-player">
 
@@ -739,10 +812,10 @@ body{
         <div class="head"></div>
         <div class="hair"></div>
 
-        <div class="shorts"></div>
-
         <div class="arm left"></div>
         <div class="arm right"></div>
+
+        <div class="shorts"></div>
 
         <div class="leg left"></div>
         <div class="leg right"></div>
@@ -757,9 +830,10 @@ body{
     </div>
 
 
-    <!-- joueurs secondaires -->
+    <!-- JOUEUR AU LOIN 1 -->
 
-    <div class="player back-player back-one">
+    <div class="player small-player one">
+
       <div class="body">
         <div class="head"></div>
         <div class="hair"></div>
@@ -769,9 +843,14 @@ body{
         <div class="leg left"></div>
         <div class="leg right"></div>
       </div>
+
     </div>
 
-    <div class="player back-player back-two">
+
+    <!-- JOUEUR AU LOIN 2 -->
+
+    <div class="player small-player two">
+
       <div class="body">
         <div class="head"></div>
         <div class="hair"></div>
@@ -781,6 +860,7 @@ body{
         <div class="leg left"></div>
         <div class="leg right"></div>
       </div>
+
     </div>
 
   </div>
@@ -793,18 +873,18 @@ body{
   <div class="dialogue">
 
     <div class="bubble">
-      « Bon… maintenant que t’es là…<br>
-      Qu’est-ce que tu veux ? »
+      Bon… maintenant que t’es là…<br>
+      qu’est-ce que tu cherches ?
     </div>
 
     <div class="choices">
 
       <button class="choice" onclick="showAnswer(1)">
-        ♡ Tu as besoin de quelque chose ?
+        ♡ Peut-être toi.
       </button>
 
       <button class="choice" onclick="showAnswer(2)">
-        ◉ Tu veux juste espionner ?
+        🎾 Je regardais juste le match... (espionnage 🙂)
       </button>
 
     </div>
@@ -816,16 +896,14 @@ body{
        RÉPONSE
   ====================== -->
 
-  <div class="response" id="response">
+  <div class="answer" id="answer">
 
-    <div class="response-box">
+    <div class="answer-box">
 
-      <h2 id="responseTitle"></h2>
+      <p id="answerText"></p>
 
-      <p id="responseText"></p>
-
-      <button class="restart" onclick="restart()">
-        ↻ Revenir au début
+      <button class="close-answer" onclick="closeAnswer()">
+        Retour
       </button>
 
     </div>
@@ -837,61 +915,33 @@ body{
 
 <script>
 
-/* =========================
-   OUVERTURE DE LA PORTE
-========================= */
-
-const door = document.getElementById("door");
 const scene = document.getElementById("scene");
+const door = document.getElementById("door");
+const answerText = document.getElementById("answerText");
 
-door.addEventListener("click", function(){
-
+door.addEventListener("click", function () {
   scene.classList.add("open");
-
 });
 
+function showAnswer(choice) {
 
-/* =========================
-   RÉPONSES
-========================= */
+  if (choice === 1) {
 
-function showAnswer(choice){
+    answerText.textContent =
+      "Ça serait mieux de m’envoyer un message alors !";
 
-  const title = document.getElementById("responseTitle");
-  const text = document.getElementById("responseText");
+  } else {
 
-  if(choice === 1){
-
-    title.innerHTML = "Hmm… peut-être 👀";
-
-    text.innerHTML =
-      "Disons que je voulais simplement voir qui allait avoir la curiosité d’ouvrir cette porte… 🎾✨";
+    answerText.textContent =
+      "Espionnage ? Bah… c’est le temps de partir alors.";
 
   }
 
-  else{
-
-    title.innerHTML = "Espionner ? Moi ? 😌";
-
-    text.innerHTML =
-      "Je préfère appeler ça une visite très discrète… mais maintenant que tu es là, tu peux rester. 🎾";
-
-  }
-
-  scene.classList.add("show-response");
-
+  scene.classList.add("show-answer");
 }
 
-
-/* =========================
-   RECOMMENCER
-========================= */
-
-function restart(){
-
-  scene.classList.remove("show-response");
-  scene.classList.remove("open");
-
+function closeAnswer() {
+  scene.classList.remove("show-answer");
 }
 
 </script>
