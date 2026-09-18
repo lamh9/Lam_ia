@@ -1,200 +1,900 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lam_ia 🎾</title>
 
-  <title>🎾 Lam_ia</title>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
 
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      background: #d9edf2;
-      font-family: Georgia, serif;
-    }
+body{
+  font-family:Georgia,"Times New Roman",serif;
+  background:#8ed4dc;
+}
 
-    .scene {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      background:
-        linear-gradient(
-          135deg,
-          #d8edf1,
-          #f5d7dc
-        );
-    }
+/* =========================
+   SCÈNE PRINCIPALE
+========================= */
 
-    .message {
-      position: absolute;
-      top: 12%;
-      text-align: center;
-      color: #59434b;
-      z-index: 5;
-    }
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,#9bdde3,#d5eeee,#efd6df);
+}
 
-    .message h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+/* =========================
+   PORTE
+========================= */
 
-    .message p {
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      opacity: 0.7;
-    }
+.message{
+  position:absolute;
+  top:11%;
+  left:0;
+  width:100%;
+  text-align:center;
+  z-index:20;
+  color:#355a64;
+  transition:1s ease;
+}
 
-    /* LA PORTE */
+.message h1{
+  font-size:29px;
+  margin-bottom:8px;
+}
 
-    .door {
-      width: 230px;
-      height: 420px;
-      background: #b87d89;
-      border: 10px solid #76525b;
-      border-radius: 8px 8px 0 0;
-      position: relative;
-      cursor: pointer;
+.message p{
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  opacity:.75;
+}
 
-      box-shadow:
-        0 25px 50px rgba(60, 40, 45, 0.3);
+.door{
+  position:absolute;
+  width:220px;
+  height:410px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(145deg,#a97582,#bd8995);
+  border:10px solid #624b54;
+  border-radius:9px 9px 0 0;
+  cursor:pointer;
+  z-index:15;
+  transform-origin:left center;
+  box-shadow:0 25px 55px rgba(30,65,70,.35);
+  transition:transform 1.4s ease,opacity 1s ease;
+}
 
-      transition: transform 1s ease;
-      transform-origin: left center;
-    }
+.door:hover{
+  transform:translate(-50%,-50%) scale(1.015);
+}
 
-    .door:hover {
-      transform: scale(1.02);
-    }
+.door::before,
+.door::after{
+  content:"";
+  position:absolute;
+  left:24px;
+  right:24px;
+  height:115px;
+  border:3px solid rgba(75,48,57,.3);
+}
 
-    /* décoration de la porte */
+.door::before{
+  top:34px;
+}
 
-    .door::before,
-    .door::after {
-      content: "";
-      position: absolute;
-      left: 25px;
-      right: 25px;
-      height: 120px;
-      border: 3px solid rgba(80, 50, 60, 0.35);
-    }
+.door::after{
+  bottom:34px;
+}
 
-    .door::before {
-      top: 35px;
-    }
+.handle{
+  position:absolute;
+  right:17px;
+  top:50%;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#e9c66d;
+  box-shadow:0 0 0 4px rgba(0,0,0,.08);
+}
 
-    .door::after {
-      bottom: 35px;
-    }
+.door-text{
+  position:absolute;
+  bottom:17px;
+  width:100%;
+  text-align:center;
+  color:white;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  letter-spacing:1px;
+}
 
-    /* poignée */
+/* =========================
+   LUMIÈRE
+========================= */
 
-    .handle {
-      position: absolute;
-      right: 18px;
-      top: 50%;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: #e8c26c;
-      box-shadow: 0 0 0 4px rgba(0,0,0,0.08);
-    }
+.glow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:500px;
+  height:700px;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,205,228,.95) 0%,
+      rgba(182,235,238,.7) 35%,
+      transparent 72%
+    );
+  opacity:0;
+  z-index:4;
+  pointer-events:none;
+  transition:opacity 2s ease;
+}
 
-    /* petit texte sur la porte */
+/* =========================
+   STADE
+========================= */
 
-    .door-text {
-      position: absolute;
-      bottom: 18px;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
+.stadium{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(1.12);
+  transition:opacity 2.2s ease,transform 2.2s ease;
+  z-index:2;
+  background:#76bfc2;
+}
 
-    /* petit effet lumineux */
+/* ciel */
 
-    .glow {
-      position: absolute;
-      width: 300px;
-      height: 500px;
-      background: radial-gradient(
-        ellipse,
-        rgba(255, 190, 220, 0.65),
-        transparent 70%
-      );
+.sky{
+  position:absolute;
+  inset:0 0 42% 0;
+  background:
+    linear-gradient(
+      to bottom,
+      #67c5d0,
+      #a7dfe1 55%,
+      #efd7d9
+    );
+}
 
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-    }
+/* soleil */
 
-    .scene.open .glow {
-      opacity: 1;
-    }
+.sun{
+  position:absolute;
+  width:95px;
+  height:95px;
+  right:13%;
+  top:12%;
+  border-radius:50%;
+  background:#ffe6ae;
+  box-shadow:0 0 60px rgba(255,231,176,.8);
+}
 
-    .scene.open .door {
-      transform: perspective(900px) rotateY(-82deg);
-    }
+/* nuages */
 
-    @media (max-width: 600px) {
+.cloud{
+  position:absolute;
+  color:rgba(255,255,255,.55);
+  font-size:60px;
+}
 
-      .door {
-        width: 190px;
-        height: 360px;
-      }
+.cloud.one{
+  top:12%;
+  left:10%;
+}
 
-      .message h1 {
-        font-size: 23px;
-      }
-    }
-  </style>
+.cloud.two{
+  top:25%;
+  right:28%;
+  font-size:45px;
+}
+
+/* végétation */
+
+.garden{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:25%;
+  height:18%;
+  background:
+    linear-gradient(
+      to top,
+      #438f7e,
+      #72b89e
+    );
+}
+
+/* palmiers */
+
+.palm{
+  position:absolute;
+  z-index:4;
+  font-size:95px;
+  filter:drop-shadow(0 8px 5px rgba(0,0,0,.15));
+}
+
+.palm.left{
+  left:2%;
+  top:16%;
+}
+
+.palm.right{
+  right:1%;
+  top:18%;
+}
+
+/* =========================
+   COURT
+========================= */
+
+.court{
+  position:absolute;
+  width:82%;
+  height:52%;
+  left:9%;
+  bottom:-9%;
+  background:
+    linear-gradient(
+      135deg,
+      #35b9c0,
+      #66d1d0
+    );
+  transform:
+    perspective(650px)
+    rotateX(48deg);
+  border:5px solid rgba(255,255,255,.9);
+  box-shadow:
+    0 -15px 35px rgba(25,90,95,.3);
+  z-index:5;
+}
+
+.court-lines{
+  position:absolute;
+  inset:14%;
+  border:3px solid rgba(255,255,255,.85);
+}
+
+.court-lines::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:white;
+}
+
+.court-lines::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:50%;
+  height:3px;
+  background:white;
+}
+
+/* filet */
+
+.net{
+  position:absolute;
+  width:67%;
+  left:16.5%;
+  bottom:29%;
+  height:7px;
+  background:white;
+  z-index:8;
+  box-shadow:0 5px 8px rgba(0,0,0,.25);
+}
+
+/* =========================
+   JOUEURS
+========================= */
+
+.player{
+  position:absolute;
+  z-index:10;
+}
+
+/* joueur principal */
+
+.main-player{
+  left:50%;
+  bottom:23%;
+  transform:translateX(-50%);
+}
+
+/* corps */
+
+.body{
+  position:relative;
+  width:57px;
+  height:135px;
+  background:#f4f4f1;
+  border-radius:25px 25px 12px 12px;
+  box-shadow:0 8px 15px rgba(0,0,0,.18);
+}
+
+/* tête vue de dos */
+
+.head{
+  position:absolute;
+  width:45px;
+  height:50px;
+  left:6px;
+  top:-42px;
+  border-radius:50%;
+  background:#ad7867;
+}
+
+/* cheveux couvrant l'arrière */
+
+.hair{
+  position:absolute;
+  width:49px;
+  height:39px;
+  left:4px;
+  top:-46px;
+  border-radius:50% 50% 35% 35%;
+  background:#25383c;
+}
+
+/* jambes */
+
+.leg{
+  position:absolute;
+  width:20px;
+  height:70px;
+  background:#ad7867;
+  bottom:-63px;
+  border-radius:15px;
+}
+
+.leg.left{
+  left:5px;
+  transform:rotate(4deg);
+}
+
+.leg.right{
+  right:5px;
+  transform:rotate(-4deg);
+}
+
+/* short */
+
+.shorts{
+  position:absolute;
+  width:60px;
+  height:40px;
+  bottom:0;
+  left:-2px;
+  background:#263f49;
+  border-radius:0 0 10px 10px;
+}
+
+/* bras */
+
+.arm{
+  position:absolute;
+  width:18px;
+  height:78px;
+  background:#ad7867;
+  border-radius:15px;
+  top:25px;
+}
+
+.arm.left{
+  left:-10px;
+  transform:rotate(18deg);
+}
+
+.arm.right{
+  right:-10px;
+  transform:rotate(-25deg);
+}
+
+/* raquette */
+
+.racket{
+  position:absolute;
+  right:-88px;
+  top:32px;
+  width:80px;
+  height:125px;
+  transform:rotate(15deg);
+}
+
+.racket-head{
+  position:absolute;
+  width:59px;
+  height:76px;
+  border:5px solid #f4e6cf;
+  border-radius:50%;
+  left:4px;
+  top:0;
+}
+
+.racket-head::after{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:2px solid rgba(255,255,255,.7);
+  border-radius:50%;
+}
+
+.racket-handle{
+  position:absolute;
+  width:8px;
+  height:55px;
+  background:#745d55;
+  left:34px;
+  top:67px;
+  transform:rotate(-15deg);
+  border-radius:4px;
+}
+
+/* joueurs arrière */
+
+.back-player{
+  transform:scale(.55);
+  opacity:.8;
+}
+
+.back-one{
+  left:20%;
+  bottom:34%;
+}
+
+.back-two{
+  right:19%;
+  bottom:36%;
+}
+
+/* =========================
+   DIALOGUE
+========================= */
+
+.dialogue{
+  position:absolute;
+  z-index:30;
+  left:50%;
+  bottom:7%;
+  transform:translateX(-50%) translateY(30px);
+  width:min(88%,520px);
+  opacity:0;
+  transition:1.2s ease;
+}
+
+.bubble{
+  position:relative;
+  background:rgba(255,255,255,.94);
+  border-radius:25px;
+  padding:18px 20px;
+  box-shadow:0 12px 30px rgba(25,70,75,.22);
+  color:#315762;
+  text-align:center;
+  font-size:17px;
+  line-height:1.4;
+}
+
+.bubble::after{
+  content:"";
+  position:absolute;
+  bottom:-17px;
+  left:50%;
+  transform:translateX(-50%);
+  border-left:17px solid transparent;
+  border-right:17px solid transparent;
+  border-top:20px solid rgba(255,255,255,.94);
+}
+
+.choices{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.choice{
+  border:none;
+  cursor:pointer;
+  padding:12px 17px;
+  border-radius:30px;
+  background:rgba(255,255,255,.95);
+  color:#41666e;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  box-shadow:0 7px 18px rgba(25,70,75,.2);
+  transition:.25s ease;
+}
+
+.choice:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================
+   RÉPONSE
+========================= */
+
+.response{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(87,181,190,.94),
+      rgba(236,207,217,.96)
+    );
+  opacity:0;
+  pointer-events:none;
+  transition:1s ease;
+}
+
+.response-box{
+  width:min(90%,430px);
+  background:rgba(255,255,255,.94);
+  border-radius:30px;
+  padding:35px 25px;
+  text-align:center;
+  color:#355b64;
+  box-shadow:0 20px 50px rgba(30,70,75,.25);
+}
+
+.response-box h2{
+  font-size:25px;
+  margin-bottom:15px;
+}
+
+.response-box p{
+  font-family:Arial,sans-serif;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.restart{
+  margin-top:25px;
+  padding:12px 22px;
+  border:0;
+  border-radius:25px;
+  cursor:pointer;
+  background:#4caeb5;
+  color:white;
+  font-size:14px;
+}
+
+/* =========================
+   ANIMATION APRÈS OUVERTURE
+========================= */
+
+.scene.open .door{
+  transform:
+    translate(-50%,-50%)
+    perspective(900px)
+    rotateY(-82deg);
+  opacity:0;
+  pointer-events:none;
+}
+
+.scene.open .message{
+  opacity:0;
+  transform:translateY(-25px);
+}
+
+.scene.open .glow{
+  opacity:1;
+}
+
+.scene.open .stadium{
+  opacity:1;
+  transform:scale(1);
+}
+
+.scene.open .dialogue{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* réponse visible */
+
+.scene.show-response .response{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .door{
+    width:190px;
+    height:360px;
+  }
+
+  .message h1{
+    font-size:24px;
+  }
+
+  .message p{
+    font-size:13px;
+  }
+
+  .palm{
+    font-size:65px;
+  }
+
+  .palm.left{
+    top:20%;
+  }
+
+  .palm.right{
+    top:23%;
+  }
+
+  .court{
+    width:110%;
+    left:-5%;
+  }
+
+  .main-player{
+    bottom:25%;
+  }
+
+  .dialogue{
+    bottom:5%;
+  }
+
+  .bubble{
+    font-size:15px;
+    padding:15px;
+  }
+
+  .choice{
+    font-size:12px;
+    padding:10px 13px;
+  }
+}
+</style>
 </head>
+
 
 <body>
 
-  <div class="scene" id="scene">
+<div class="scene" id="scene">
 
-    <div class="message">
-      <h1>Tu veux entrer ?</h1>
-      <p>Alors ouvre la porte...</p>
+  <!-- =====================
+       PORTE
+  ====================== -->
+
+  <div class="message">
+    <h1>Tu veux entrer ?</h1>
+    <p>Alors ouvre la porte...</p>
+  </div>
+
+  <div class="glow"></div>
+
+  <div class="door" id="door">
+    <div class="handle"></div>
+    <div class="door-text">✦ clique ici ✦</div>
+  </div>
+
+
+  <!-- =====================
+       STADE
+  ====================== -->
+
+  <div class="stadium">
+
+    <div class="sky"></div>
+
+    <div class="sun"></div>
+
+    <div class="cloud one">☁</div>
+    <div class="cloud two">☁</div>
+
+    <div class="palm left">🌴</div>
+    <div class="palm right">🌴</div>
+
+    <div class="garden"></div>
+
+    <div class="court">
+      <div class="court-lines"></div>
     </div>
 
-    <div class="glow"></div>
+    <div class="net"></div>
 
-    <div class="door" id="door">
 
-      <div class="handle"></div>
+    <!-- joueur principal -->
 
-      <div class="door-text">
-        ✦ clique ici ✦
+    <div class="player main-player">
+
+      <div class="body">
+
+        <div class="head"></div>
+        <div class="hair"></div>
+
+        <div class="shorts"></div>
+
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+
       </div>
+
+      <div class="racket">
+        <div class="racket-head"></div>
+        <div class="racket-handle"></div>
+      </div>
+
+    </div>
+
+
+    <!-- joueurs secondaires -->
+
+    <div class="player back-player back-one">
+      <div class="body">
+        <div class="head"></div>
+        <div class="hair"></div>
+        <div class="shorts"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+
+    <div class="player back-player back-two">
+      <div class="body">
+        <div class="head"></div>
+        <div class="hair"></div>
+        <div class="shorts"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- =====================
+       DIALOGUE
+  ====================== -->
+
+  <div class="dialogue">
+
+    <div class="bubble">
+      « Bon… maintenant que t’es là…<br>
+      Qu’est-ce que tu veux ? »
+    </div>
+
+    <div class="choices">
+
+      <button class="choice" onclick="showAnswer(1)">
+        ♡ Tu as besoin de quelque chose ?
+      </button>
+
+      <button class="choice" onclick="showAnswer(2)">
+        ◉ Tu veux juste espionner ?
+      </button>
 
     </div>
 
   </div>
 
-  <script>
 
-    const door = document.getElementById("door");
-    const scene = document.getElementById("scene");
+  <!-- =====================
+       RÉPONSE
+  ====================== -->
 
-    door.addEventListener("click", function () {
+  <div class="response" id="response">
 
-      scene.classList.add("open");
+    <div class="response-box">
 
-    });
+      <h2 id="responseTitle"></h2>
 
-  </script>
+      <p id="responseText"></p>
+
+      <button class="restart" onclick="restart()">
+        ↻ Revenir au début
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   OUVERTURE DE LA PORTE
+========================= */
+
+const door = document.getElementById("door");
+const scene = document.getElementById("scene");
+
+door.addEventListener("click", function(){
+
+  scene.classList.add("open");
+
+});
+
+
+/* =========================
+   RÉPONSES
+========================= */
+
+function showAnswer(choice){
+
+  const title = document.getElementById("responseTitle");
+  const text = document.getElementById("responseText");
+
+  if(choice === 1){
+
+    title.innerHTML = "Hmm… peut-être 👀";
+
+    text.innerHTML =
+      "Disons que je voulais simplement voir qui allait avoir la curiosité d’ouvrir cette porte… 🎾✨";
+
+  }
+
+  else{
+
+    title.innerHTML = "Espionner ? Moi ? 😌";
+
+    text.innerHTML =
+      "Je préfère appeler ça une visite très discrète… mais maintenant que tu es là, tu peux rester. 🎾";
+
+  }
+
+  scene.classList.add("show-response");
+
+}
+
+
+/* =========================
+   RECOMMENCER
+========================= */
+
+function restart(){
+
+  scene.classList.remove("show-response");
+  scene.classList.remove("open");
+
+}
+
+</script>
 
 </body>
   </html>
