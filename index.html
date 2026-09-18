@@ -3,995 +3,1258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lam_ia 🎾</title>
+<title>Tennis Club 🎾</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+body{
+  overflow:hidden;
+  font-family:Georgia,"Times New Roman",serif;
+  background:#071f27;
 }
 
-body {
-  font-family: Georgia, "Times New Roman", serif;
-  background: #f3c6cb;
+/* =========================
+   PORTE ROSE
+========================= */
+
+#doorScreen{
+  position:fixed;
+  inset:0;
+  z-index:20;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at 50% 45%,
+    #ffe8f0 0%,
+    #f3a8bd 30%,
+    #9c5872 70%,
+    #432837 100%);
+  transition:opacity 1.2s ease,visibility 1.2s ease;
 }
 
-/* =========================================
-   SCÈNE
-========================================= */
-
-.scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+.doorScene{
+  text-align:center;
+  color:white;
+  width:100%;
 }
 
-/* =========================================
-   PORTE
-========================================= */
+.doorQuestion{
+  margin-bottom:30px;
+  text-shadow:0 3px 15px rgba(80,20,45,.4);
+}
 
-.door-scene {
-  position: absolute;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.doorQuestion h1{
+  font-size:clamp(30px,7vw,58px);
+  font-weight:normal;
+  letter-spacing:2px;
+}
+
+.doorQuestion p{
+  margin-top:12px;
+  font-size:clamp(16px,4vw,23px);
+  font-style:italic;
+}
+
+/* PORTE ROSE */
+
+.door{
+  position:relative;
+  width:min(270px,70vw);
+  height:min(430px,62vh);
+  margin:auto;
+
+  border:10px solid #f8c1d4;
+  border-radius:10px 10px 4px 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #b94f78 0%,
+      #e887a8 28%,
+      #c85d86 55%,
+      #ef9db8 78%,
+      #b94f78 100%
+    );
+
+  box-shadow:
+    0 0 0 5px rgba(255,255,255,.2),
+    0 25px 70px rgba(80,20,45,.5),
+    inset 0 0 30px rgba(100,30,60,.25);
+
+  cursor:pointer;
+  transform-origin:left center;
+
+  transition:
+    transform 1.3s cubic-bezier(.7,.1,.2,1);
+}
+
+.door:before{
+  content:"";
+  position:absolute;
+  inset:18px;
+
+  border:3px solid rgba(255,235,242,.9);
+
+  box-shadow:
+    inset 0 0 0 2px rgba(120,40,70,.25);
+}
+
+.door:after{
+  content:"";
+  position:absolute;
+  top:50%;
+  right:22px;
+
+  width:14px;
+  height:14px;
+
+  border-radius:50%;
+
+  background:#ffe2a8;
+
+  box-shadow:
+    0 2px 5px #74384f,
+    0 0 8px rgba(255,225,160,.5);
+}
+
+.doorText{
+  position:absolute;
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  width:170px;
+  padding:13px 10px;
+
+  border:1px solid rgba(255,255,255,.75);
+
+  background:rgba(120,35,65,.2);
+
+  color:white;
+
+  font-size:17px;
+  letter-spacing:2px;
+
+  text-shadow:0 2px 5px rgba(80,20,40,.4);
+}
+
+/* =========================
+   STADE
+========================= */
+
+#stadium{
+  position:fixed;
+  inset:0;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:opacity 1.5s ease;
+
+  overflow:hidden;
+
+  background:#8fc8c4;
+}
+
+#stadium.show{
+  opacity:1;
+  visibility:visible;
+}
+
+/* CIEL */
+
+.sky{
+  position:absolute;
+  inset:0 0 45% 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #80c9c9 0%,
+      #a6d5c8 45%,
+      #f5b9a6 78%,
+      #ef9d8e 100%
+    );
+}
+
+.sun{
+  position:absolute;
+
+  width:95px;
+  height:95px;
+
+  border-radius:50%;
+
+  background:#ffe9ad;
+
+  left:50%;
+  top:15%;
+
+  transform:translateX(-50%);
+
+  box-shadow:
+    0 0 50px rgba(255,236,170,.9);
+}
+
+.cloud{
+  position:absolute;
+
+  width:130px;
+  height:28px;
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.38);
+}
+
+.cloud:before,
+.cloud:after{
+  content:"";
+  position:absolute;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.38);
+}
+
+.cloud:before{
+  width:48px;
+  height:48px;
+  left:25px;
+  bottom:4px;
+}
+
+.cloud:after{
+  width:60px;
+  height:60px;
+  left:55px;
+  bottom:0;
+}
+
+.cloud.one{
+  top:17%;
+  left:7%;
+}
+
+.cloud.two{
+  top:25%;
+  right:5%;
+  transform:scale(.7);
+}
+
+/* =========================
+   SOL
+========================= */
+
+.ground{
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:48%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #477f58 0%,
+      #356b4a 35%,
+      #244f3d 100%
+    );
+}
+
+.garden{
+  position:absolute;
+
+  bottom:35%;
+  left:0;
+  right:0;
+
+  height:80px;
+
+  background:
+    radial-gradient(circle at 5% 60%,#285f42 0 30px,transparent 31px),
+    radial-gradient(circle at 15% 45%,#39764e 0 35px,transparent 36px),
+    radial-gradient(circle at 30% 65%,#2e6946 0 32px,transparent 33px),
+    radial-gradient(circle at 50% 45%,#3c7b51 0 36px,transparent 37px),
+    radial-gradient(circle at 70% 60%,#286241 0 34px,transparent 35px),
+    radial-gradient(circle at 87% 45%,#3a7650 0 38px,transparent 39px);
+}
+
+/* =========================
+   PALMIERS
+========================= */
+
+.palm{
+  position:absolute;
+  bottom:39%;
+
+  width:90px;
+  height:190px;
+}
+
+.palm.left{
+  left:2%;
+}
+
+.palm.right{
+  right:2%;
+  transform:scale(.85);
+}
+
+.palmTrunk{
+  position:absolute;
+
+  bottom:0;
+  left:42px;
+
+  width:17px;
+  height:125px;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #795b38,
+      #b18a55,
+      #6e4c30
+    );
+
+  transform:rotate(7deg);
+  transform-origin:bottom;
+}
+
+.palmLeaves{
+  position:absolute;
+
+  left:5px;
+  top:30px;
+
+  width:80px;
+  height:80px;
+}
+
+.leaf{
+  position:absolute;
+
+  width:62px;
+  height:13px;
+
+  background:#285e42;
+
+  border-radius:100% 10% 100% 10%;
+
+  transform-origin:100% 50%;
+}
+
+.leaf:nth-child(1){
+  transform:rotate(-55deg);
+  top:20px;
+  left:8px;
+}
+
+.leaf:nth-child(2){
+  transform:rotate(-25deg);
+  top:5px;
+  left:10px;
+}
+
+.leaf:nth-child(3){
+  transform:rotate(5deg);
+  top:0;
+  left:10px;
+}
+
+.leaf:nth-child(4){
+  transform:rotate(35deg);
+  top:8px;
+  left:8px;
+}
+
+.leaf:nth-child(5){
+  transform:rotate(65deg);
+  top:22px;
+  left:4px;
+}
+
+.leaf:nth-child(6){
+  transform:rotate(105deg);
+  top:33px;
+  left:3px;
+}
+
+/* =========================
+   ZONE TURQUOISE
+========================= */
+
+.turquoiseArea{
+  position:absolute;
+
+  left:8%;
+  right:8%;
+  bottom:5%;
+
+  height:38%;
+
+  border-radius:25px;
 
   background:
     linear-gradient(
       135deg,
-      #74b9bd,
-      #a9d5cc 48%,
-      #e8b4bb
+      #2f9d9d,
+      #66c2bb 50%,
+      #318f94
     );
 
-  transition: opacity 1.5s ease;
+  border:9px solid #176e79;
+
+  box-shadow:
+    0 15px 30px rgba(0,0,0,.25),
+    inset 0 0 0 3px rgba(255,255,255,.25);
 }
 
-.door-title {
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  text-align: center;
-  color: #304f57;
-}
+/* =========================
+   COURT ROSE
+========================= */
 
-.door-title h1 {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
+.court{
+  position:absolute;
 
-.door-title p {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  opacity: .8;
-}
+  left:17%;
+  right:17%;
+  bottom:9%;
 
-.door {
-  position: relative;
-  width: 220px;
-  height: 400px;
+  height:31%;
 
   background:
     linear-gradient(
-      145deg,
-      #a87782,
-      #c18c95
+      180deg,
+      #ef9aa7,
+      #e9899a
     );
 
-  border: 9px solid #654d54;
-  border-radius: 8px 8px 0 0;
+  border:6px solid #fff3ed;
 
   box-shadow:
-    0 25px 50px rgba(40, 60, 65, .35);
+    0 10px 25px rgba(0,0,0,.25),
+    inset 0 0 0 3px rgba(145,63,80,.2);
 
-  cursor: pointer;
-  transform-origin: left center;
-
-  transition:
-    transform 1.5s ease,
-    opacity 1s ease;
+  clip-path:polygon(
+    5% 0,
+    95% 0,
+    100% 100%,
+    0 100%
+  );
 }
 
-.door-panel {
-  position: absolute;
-  left: 25px;
-  right: 25px;
-  height: 115px;
-  border: 3px solid rgba(70,45,55,.3);
+/* LIGNES */
+
+.courtLine{
+  position:absolute;
+  background:white;
+
+  box-shadow:
+    0 0 2px rgba(0,0,0,.15);
 }
 
-.door-panel.top {
-  top: 30px;
+.lineTop{
+  left:8%;
+  right:8%;
+  top:22%;
+  height:3px;
 }
 
-.door-panel.bottom {
-  bottom: 30px;
+.lineMiddle{
+  top:0;
+  bottom:0;
+  left:50%;
+  width:3px;
+  transform:translateX(-50%);
 }
 
-.handle {
-  position: absolute;
-  right: 17px;
-  top: 50%;
-
-  width: 16px;
-  height: 16px;
-
-  border-radius: 50%;
-  background: #e7c16b;
+.lineBottom{
+  left:8%;
+  right:8%;
+  bottom:22%;
+  height:3px;
 }
 
-.open-text {
-  position: absolute;
-  bottom: 18px;
-  left: 0;
-  width: 100%;
-
-  text-align: center;
-
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
+.sideLeft{
+  top:22%;
+  bottom:22%;
+  left:18%;
+  width:3px;
 }
 
-/* =========================================
+.sideRight{
+  top:22%;
+  bottom:22%;
+  right:18%;
+  width:3px;
+}
+
+/* FILET */
+
+.net{
+  position:absolute;
+
+  left:11%;
+  right:11%;
+  top:49%;
+
+  height:4px;
+
+  background:#f9f8f0;
+
+  box-shadow:
+    0 0 4px rgba(0,0,0,.25);
+}
+
+.net:before,
+.net:after{
+  content:"";
+
+  position:absolute;
+
+  top:-30px;
+
+  width:5px;
+  height:35px;
+
+  background:#f5f1e6;
+}
+
+.net:before{
+  left:0;
+}
+
+.net:after{
+  right:0;
+}
+
+/* =========================
    STADE
-========================================= */
+========================= */
 
-.tennis-scene {
-  position: absolute;
-  inset: 0;
+.stadiumBack{
+  position:absolute;
 
-  opacity: 0;
-  transform: scale(1.05);
+  left:13%;
+  right:13%;
+  bottom:43%;
 
-  transition:
-    opacity 2s ease,
-    transform 2s ease;
+  height:75px;
 
-  background: #9bcf9c;
-}
-
-/* ciel */
-
-.sky {
-  position: absolute;
-  inset: 0 0 50% 0;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #76c7d2 0%,
-      #b8ded4 55%,
-      #f5d49d 100%
-    );
-}
-
-/* soleil */
-
-.sun {
-  position: absolute;
-
-  width: 105px;
-  height: 105px;
-
-  left: 50%;
-  top: 20%;
-
-  transform: translateX(-50%);
-
-  border-radius: 50%;
-
-  background: #ffe5a9;
-
-  box-shadow:
-    0 0 65px rgba(255,224,165,.9);
-}
-
-/* =========================================
-   PALMIERS
-   Ils sont maintenant derrière le court
-   ========================================= */
-
-.palm {
-  position: absolute;
-  z-index: 3;
-
-  color: #527b43;
-
-  line-height: 1;
-}
-
-/* palmier gauche */
-
-.palm-left {
-  left: 2%;
-  bottom: 41%;
-  font-size: 110px;
-  transform: rotate(-3deg);
-}
-
-/* palmier droit */
-
-.palm-right {
-  right: 1%;
-  bottom: 39%;
-  font-size: 125px;
-  transform: rotate(4deg);
-}
-
-/* petits palmiers */
-
-.palm-small-left {
-  position: absolute;
-  left: 20%;
-  bottom: 42%;
-  z-index: 3;
-  font-size: 65px;
-}
-
-.palm-small-right {
-  position: absolute;
-  right: 19%;
-  bottom: 42%;
-  z-index: 3;
-  font-size: 65px;
-}
-
-/* =========================================
-   JARDIN AUTOUR DU COURT
-========================================= */
-
-.garden {
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 48%;
-
-  z-index: 4;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #4e914d,
-      #3d7b45
-    );
-}
-
-/* bordures fleuries */
-
-.flower-border {
-  position: absolute;
-  z-index: 6;
-
-  color: #e99aa9;
-
-  font-size: 25px;
-
-  letter-spacing: 8px;
-
-  white-space: nowrap;
-}
-
-.flower-border.top {
-  left: 8%;
-  right: 8%;
-  bottom: 45%;
-  text-align: center;
-}
-
-.flower-border.left {
-  left: 2%;
-  bottom: 8%;
-  writing-mode: vertical-rl;
-}
-
-.flower-border.right {
-  right: 2%;
-  bottom: 8%;
-  writing-mode: vertical-rl;
-}
-
-/* =========================================
-   COURT DE TENNIS
-========================================= */
-
-.court-area {
-  position: absolute;
-
-  left: 8%;
-  right: 8%;
-
-  bottom: 0;
-
-  height: 60%;
-
-  z-index: 10;
-
-  display: flex;
-  justify-content: center;
-}
-
-/* vrai court rose */
-
-.court {
-  position: absolute;
-
-  width: 76%;
-  height: 100%;
-
-  bottom: -4%;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #ed91a3,
-      #e88b9d
-    );
-
-  border-left: 7px solid #f8c3ca;
-  border-right: 7px solid #f8c3ca;
-
-  clip-path:
-    polygon(
-      15% 0%,
-      85% 0%,
-      100% 100%,
-      0% 100%
-    );
-
-  box-shadow:
-    0 -10px 30px rgba(80,70,65,.25);
-}
-
-/* lignes du terrain */
-
-.court-lines {
-  position: absolute;
-
-  left: 16%;
-  right: 16%;
-
-  top: 8%;
-  bottom: 7%;
-
-  border: 4px solid white;
-}
-
-/* ligne centrale */
-
-.center-line {
-  position: absolute;
-
-  left: 50%;
-
-  top: 8%;
-  bottom: 7%;
-
-  width: 4px;
-
-  background: white;
-
-  transform: translateX(-50%);
-}
-
-/* lignes de service */
-
-.service-top,
-.service-bottom {
-  position: absolute;
-
-  left: 16%;
-  right: 16%;
-
-  height: 4px;
-
-  background: white;
-}
-
-.service-top {
-  top: 38%;
-}
-
-.service-bottom {
-  top: 62%;
-}
-
-/* =========================================
-   FILET
-========================================= */
-
-.net {
-  position: absolute;
-
-  left: 17%;
-  right: 17%;
-
-  top: 50%;
-
-  height: 12px;
-
-  z-index: 20;
+  border-radius:50% 50% 0 0;
 
   background:
     repeating-linear-gradient(
-      to right,
-      rgba(255,255,255,.95) 0 2px,
-      rgba(90,90,90,.35) 2px 5px
+      90deg,
+      #28747a 0 18px,
+      #6bb6ae 18px 25px
     );
 
-  border-top: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border:5px solid #17616b;
 
   box-shadow:
-    0 4px 8px rgba(0,0,0,.25);
+    0 10px 15px rgba(0,0,0,.2);
 }
 
-/* poteaux du filet */
+.stadiumRail{
+  position:absolute;
 
-.net-post-left,
-.net-post-right {
-  position: absolute;
+  left:10%;
+  right:10%;
+  bottom:40%;
 
-  top: -34px;
+  height:9px;
 
-  width: 7px;
-  height: 45px;
+  background:#166773;
 
-  background: #555;
-
-  z-index: 21;
+  border-radius:10px;
 }
 
-.net-post-left {
-  left: 0;
+/* =========================
+   FLEURS
+========================= */
+
+.flowers{
+  position:absolute;
+
+  bottom:38%;
+  left:0;
+  right:0;
+
+  height:35px;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:flex-end;
 }
 
-.net-post-right {
-  right: 0;
+.flower{
+  font-size:23px;
+
+  filter:
+    drop-shadow(0 2px 2px rgba(0,0,0,.2));
 }
 
-/* =========================================
-   BALLE
-========================================= */
+/* =========================
+   PANNEAU
+========================= */
 
-.ball {
-  position: absolute;
+.clubSign{
+  position:absolute;
 
-  z-index: 22;
+  top:7%;
+  left:50%;
 
-  width: 22px;
-  height: 22px;
+  transform:translateX(-50%);
 
-  border-radius: 50%;
+  padding:9px 24px;
 
-  background: #d8e852;
+  border:3px solid #176e79;
+  border-radius:8px;
+
+  background:#fff7ed;
+
+  color:#176e79;
+
+  font-size:clamp(13px,3vw,20px);
+
+  letter-spacing:4px;
+
+  font-weight:bold;
 
   box-shadow:
-    0 3px 5px rgba(0,0,0,.2);
+    0 7px 18px rgba(0,0,0,.2);
+
+  z-index:5;
 }
 
-.ball.one {
-  right: 29%;
-  bottom: 22%;
-}
-
-.ball.two {
-  left: 28%;
-  bottom: 30%;
-  transform: scale(.65);
-}
-
-/* =========================================
+/* =========================
    JOUEUR PRINCIPAL
-========================================= */
+========================= */
 
-.main-player {
-  position: absolute;
+.player{
+  position:absolute;
 
-  left: 50%;
-  bottom: 19%;
+  z-index:8;
 
-  transform: translateX(-50%);
+  left:50%;
+  bottom:8%;
 
-  z-index: 30;
+  width:150px;
+  height:280px;
+
+  transform:translateX(-50%);
 }
 
-/* corps */
+/* TÊTE */
 
-.body {
-  position: relative;
+.playerHead{
+  position:absolute;
 
-  width: 62px;
-  height: 140px;
+  width:67px;
+  height:75px;
 
-  background: #293d43;
+  border-radius:48% 48% 43% 43%;
 
-  border-radius:
-    25px 25px 10px 10px;
+  background:#c98b69;
 
-  box-shadow:
-    0 10px 16px rgba(0,0,0,.22);
+  left:41px;
+  top:8px;
+
+  z-index:4;
 }
 
-/* tête */
+.playerHair{
+  position:absolute;
 
-.head {
-  position: absolute;
+  width:75px;
+  height:43px;
 
-  left: 8px;
-  top: -45px;
+  left:37px;
+  top:1px;
 
-  width: 45px;
-  height: 50px;
+  border-radius:50% 50% 30% 30%;
 
-  border-radius: 50%;
+  background:#33251f;
 
-  background: #a97666;
+  z-index:5;
 }
 
-/* cheveux */
+.cap{
+  position:absolute;
 
-.hair {
-  position: absolute;
+  width:83px;
+  height:28px;
 
-  left: 3px;
-  top: -50px;
+  left:33px;
+  top:0;
 
-  width: 53px;
-  height: 42px;
+  border-radius:50% 50% 25% 25%;
 
-  border-radius:
-    50% 50% 35% 35%;
+  background:#176e79;
 
-  background: #293438;
+  z-index:6;
 }
 
-/* short */
+.cap:after{
+  content:"";
 
-.shorts {
-  position: absolute;
+  position:absolute;
 
-  left: -2px;
-  bottom: 0;
+  width:50px;
+  height:9px;
 
-  width: 66px;
-  height: 43px;
+  right:-25px;
+  bottom:1px;
 
-  border-radius:
-    0 0 10px 10px;
+  border-radius:100%;
 
-  background: #f1eee8;
+  background:#176e79;
+
+  transform:rotate(8deg);
 }
 
-/* bras */
+.playerNeck{
+  position:absolute;
 
-.arm {
-  position: absolute;
+  left:59px;
+  top:68px;
 
-  top: 28px;
+  width:32px;
+  height:30px;
 
-  width: 18px;
-  height: 82px;
+  background:#c98b69;
 
-  border-radius: 15px;
-
-  background: #a97666;
+  z-index:2;
 }
 
-.arm.left {
-  left: -11px;
-  transform: rotate(15deg);
-}
+/* CORPS */
 
-.arm.right {
-  right: -11px;
-  transform: rotate(-20deg);
-}
+.playerBody{
+  position:absolute;
 
-/* jambes */
+  left:29px;
+  top:83px;
 
-.leg {
-  position: absolute;
-
-  bottom: -65px;
-
-  width: 21px;
-  height: 70px;
-
-  border-radius: 15px;
-
-  background: #a97666;
-}
-
-.leg.left {
-  left: 7px;
-}
-
-.leg.right {
-  right: 7px;
-}
-
-/* =========================================
-   RAQUETTE
-========================================= */
-
-.racket {
-  position: absolute;
-
-  right: -83px;
-  top: 38px;
-
-  width: 80px;
-  height: 125px;
-
-  transform: rotate(14deg);
-}
-
-.racket-head {
-  position: absolute;
-
-  left: 4px;
-  top: 0;
-
-  width: 58px;
-  height: 75px;
-
-  border: 5px solid #f4e6cd;
-
-  border-radius: 50%;
-}
-
-.racket-head::after {
-  content: "";
-
-  position: absolute;
-
-  inset: 8px;
-
-  border: 2px solid rgba(255,255,255,.8);
-
-  border-radius: 50%;
-}
-
-.racket-handle {
-  position: absolute;
-
-  left: 34px;
-  top: 66px;
-
-  width: 8px;
-  height: 58px;
-
-  border-radius: 4px;
-
-  background: #70564d;
-
-  transform: rotate(-15deg);
-}
-
-/* =========================================
-   JOUEURS AU LOIN
-========================================= */
-
-.far-player {
-  position: absolute;
-
-  z-index: 25;
-
-  transform: scale(.38);
-
-  opacity: .85;
-}
-
-.far-player.left {
-  left: 24%;
-  top: 20%;
-}
-
-.far-player.right {
-  right: 24%;
-  top: 20%;
-}
-
-/* =========================================
-   PANNEAU TENNIS CLUB
-========================================= */
-
-.club-sign {
-  position: absolute;
-
-  top: 12%;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  z-index: 12;
-
-  padding: 8px 20px;
-
-  background: #477b69;
-
-  color: white;
-
-  font-family: Arial, sans-serif;
-
-  font-size: 11px;
-
-  letter-spacing: 2px;
-
-  border-radius: 3px;
-}
-
-/* =========================================
-   DIALOGUE
-========================================= */
-
-.dialogue {
-  position: absolute;
-
-  left: 50%;
-  bottom: 4%;
-
-  width: min(90%, 500px);
-
-  transform:
-    translateX(-50%)
-    translateY(30px);
-
-  z-index: 40;
-
-  opacity: 0;
-
-  transition: 1.2s ease;
-}
-
-.bubble {
-  position: relative;
-
-  padding: 17px 20px;
-
-  background: rgba(255,255,255,.96);
-
-  border-radius: 25px;
-
-  text-align: center;
-
-  color: #365b63;
-
-  font-size: 17px;
-
-  line-height: 1.4;
-
-  box-shadow:
-    0 12px 30px rgba(30,70,70,.25);
-}
-
-.bubble::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: -17px;
-
-  transform: translateX(-50%);
-
-  border-left: 17px solid transparent;
-  border-right: 17px solid transparent;
-  border-top: 20px solid white;
-}
-
-/* choix */
-
-.choices {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
-
-  margin-top: 20px;
-}
-
-.choice {
-  width: 100%;
-
-  padding: 12px 18px;
-
-  border-radius: 30px;
-
-  border: 2px solid white;
-
-  cursor: pointer;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 15px;
-
-  color: #3e6268;
-
-  background: #f3c3cc;
-
-  box-shadow:
-    0 7px 18px rgba(40,70,70,.18);
-
-  transition: .25s ease;
-}
-
-.choice:nth-child(2) {
-  background: #c8e3da;
-}
-
-.choice:hover {
-  transform: translateY(-3px);
-}
-
-/* =========================================
-   RÉPONSE
-========================================= */
-
-.answer {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 100;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
+  width:95px;
+  height:125px;
 
   background:
-    rgba(45,75,70,.38);
+    linear-gradient(
+      90deg,
+      #f3f1e8,
+      #ffffff,
+      #d9eee8
+    );
 
-  opacity: 0;
+  border-radius:25px 25px 15px 15px;
 
-  pointer-events: none;
-
-  transition: 1s ease;
+  z-index:3;
 }
 
-.answer-box {
-  width: min(90%, 430px);
+.playerBody:after{
+  content:"";
 
-  padding: 30px 23px;
+  position:absolute;
 
-  border-radius: 28px;
+  left:38px;
+  top:0;
 
-  background: rgba(255,255,255,.97);
+  width:20px;
+  height:115px;
 
-  text-align: center;
+  background:#70bdb6;
 
-  color: #365b63;
+  opacity:.65;
+}
+
+/* BRAS */
+
+.playerArmLeft,
+.playerArmRight{
+  position:absolute;
+
+  width:30px;
+  height:115px;
+
+  border-radius:25px;
+
+  background:#f4f1e7;
+
+  top:93px;
+
+  z-index:2;
+}
+
+.playerArmLeft{
+  left:14px;
+  transform:rotate(15deg);
+}
+
+.playerArmRight{
+  right:8px;
+  transform:rotate(-35deg);
+}
+
+/* JAMBES */
+
+.playerLegLeft,
+.playerLegRight{
+  position:absolute;
+
+  width:35px;
+  height:92px;
+
+  top:195px;
+
+  background:#273f45;
+
+  border-radius:10px;
+
+  z-index:2;
+}
+
+.playerLegLeft{
+  left:40px;
+  transform:rotate(4deg);
+}
+
+.playerLegRight{
+  right:40px;
+  transform:rotate(-4deg);
+}
+
+.shoe{
+  position:absolute;
+
+  width:50px;
+  height:20px;
+
+  background:#f8f5eb;
+
+  border-radius:20px;
+
+  bottom:-5px;
+}
+
+.playerLegLeft .shoe{
+  left:-12px;
+}
+
+.playerLegRight .shoe{
+  right:-12px;
+}
+
+/* =========================
+   🎾 RAQUETTE
+========================= */
+
+.racket{
+  position:absolute;
+
+  z-index:20;
+
+  width:72px;
+  height:150px;
+
+  right:-25px;
+  top:88px;
+
+  transform:rotate(18deg);
+}
+
+.racketHead{
+  position:absolute;
+
+  top:0;
+  left:4px;
+
+  width:63px;
+  height:87px;
+
+  border:5px solid #f7f3df;
+
+  border-radius:50%;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 8px,
+      rgba(255,255,255,.65) 9px 10px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 8px,
+      rgba(255,255,255,.65) 9px 10px
+    );
 
   box-shadow:
-    0 20px 50px rgba(30,70,70,.3);
+    0 3px 8px rgba(0,0,0,.35),
+    inset 0 0 0 2px #4d9e9b;
 }
 
-.answer-box p {
-  font-size: 20px;
-  line-height: 1.5;
+.racketBridge{
+  position:absolute;
+
+  top:78px;
+  left:27px;
+
+  width:20px;
+  height:16px;
+
+  border-left:4px solid #f7f3df;
+  border-right:4px solid #f7f3df;
 }
 
-.close-answer {
-  margin-top: 25px;
+.racketHandle{
+  position:absolute;
 
-  padding: 11px 22px;
+  top:90px;
+  left:31px;
 
-  border: none;
+  width:13px;
+  height:57px;
 
-  border-radius: 25px;
+  border-radius:5px;
 
-  background: #65aaa1;
+  background:
+    linear-gradient(
+      90deg,
+      #a86c43,
+      #d59b63,
+      #8a5436
+    );
 
-  color: white;
-
-  cursor: pointer;
-
-  font-size: 14px;
+  box-shadow:
+    2px 3px 5px rgba(0,0,0,.3);
 }
 
-/* =========================================
-   ANIMATION
-========================================= */
+.racketGrip{
+  position:absolute;
 
-.scene.open .door-scene {
-  opacity: 0;
-  pointer-events: none;
+  bottom:0;
+  left:27px;
+
+  width:21px;
+  height:25px;
+
+  border-radius:5px;
+
+  background:#176e79;
+
+  box-shadow:
+    2px 3px 5px rgba(0,0,0,.3);
 }
 
-.scene.open .door {
-  transform:
-    perspective(900px)
-    rotateY(-82deg);
+/* =========================
+   PETITS JOUEURS
+========================= */
+
+.smallPlayer{
+  position:absolute;
+
+  z-index:7;
+
+  bottom:40%;
+
+  width:65px;
+  height:125px;
 }
 
-.scene.open .tennis-scene {
-  opacity: 1;
-  transform: scale(1);
+.smallPlayer.one{
+  left:24%;
 }
 
-.scene.open .dialogue {
-  opacity: 1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
+.smallPlayer.two{
+  right:24%;
 }
 
-.scene.show-answer .answer {
-  opacity: 1;
-  pointer-events: auto;
+.smallHead{
+  position:absolute;
+
+  top:0;
+  left:20px;
+
+  width:27px;
+  height:31px;
+
+  border-radius:50%;
+
+  background:#b9795c;
 }
 
-/* =========================================
+.smallBody{
+  position:absolute;
+
+  top:28px;
+  left:11px;
+
+  width:45px;
+  height:57px;
+
+  border-radius:15px;
+
+  background:#f4f0e6;
+}
+
+.smallLeg1,
+.smallLeg2{
+  position:absolute;
+
+  top:78px;
+
+  width:15px;
+  height:45px;
+
+  background:#31434a;
+
+  border-radius:8px;
+}
+
+.smallLeg1{
+  left:18px;
+}
+
+.smallLeg2{
+  left:35px;
+}
+
+/* =========================
+   DIALOGUE
+========================= */
+
+.dialogue{
+  position:absolute;
+
+  z-index:15;
+
+  left:50%;
+  bottom:4%;
+
+  transform:translateX(-50%);
+
+  width:min(430px,90vw);
+
+  padding:17px 20px 15px;
+
+  background:rgba(255,249,240,.96);
+
+  border:3px solid #176e79;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.28);
+
+  text-align:center;
+}
+
+.dialogueText{
+  color:#24464b;
+
+  font-size:17px;
+  line-height:1.4;
+
+  margin-bottom:12px;
+}
+
+.choices{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.choice{
+  border:1px solid #5aa8a4;
+
+  background:#fff;
+
+  color:#24565a;
+
+  border-radius:12px;
+
+  padding:10px;
+
+  font-family:inherit;
+
+  font-size:14px;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.choice:hover{
+  background:#dff3f0;
+  transform:translateY(-2px);
+}
+
+/* =========================
+   REPONSE
+========================= */
+
+.response{
+  position:absolute;
+
+  z-index:30;
+
+  inset:0;
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+
+  background:rgba(17,51,55,.45);
+
+  backdrop-filter:blur(4px);
+}
+
+.responseBox{
+  width:min(430px,88vw);
+
+  padding:35px 25px;
+
+  border-radius:22px;
+
+  background:#fff8ef;
+
+  border:4px solid #176e79;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.3);
+
+  text-align:center;
+
+  color:#24565a;
+
+  animation:pop .4s ease;
+}
+
+.responseBox p{
+  font-size:21px;
+
+  line-height:1.5;
+
+  margin-bottom:20px;
+}
+
+.closeBtn{
+  border:0;
+
+  background:#176e79;
+
+  color:white;
+
+  padding:10px 22px;
+
+  border-radius:12px;
+
+  font-family:inherit;
+
+  cursor:pointer;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(.7);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* =========================
    MOBILE
-========================================= */
+========================= */
 
-@media (max-width: 600px) {
+@media(max-width:600px){
 
-  .door {
-    width: 190px;
-    height: 360px;
+  .clubSign{
+    top:4%;
+    letter-spacing:2px;
+    padding:7px 15px;
   }
 
-  .door-title h1 {
-    font-size: 24px;
+  .stadiumBack{
+    left:7%;
+    right:7%;
+    height:60px;
   }
 
-  .door-title p {
-    font-size: 13px;
+  .turquoiseArea{
+    left:3%;
+    right:3%;
+    bottom:4%;
+    height:36%;
+    border-width:7px;
   }
 
-  .palm-left {
-    font-size: 75px;
-    left: -5%;
+  .court{
+    left:10%;
+    right:10%;
+    bottom:8%;
+    height:29%;
+    border-width:4px;
   }
 
-  .palm-right {
-    font-size: 85px;
-    right: -7%;
+  .palm{
+    transform:scale(.72);
+    transform-origin:bottom;
   }
 
-  .palm-small-left,
-  .palm-small-right {
-    font-size: 45px;
+  .palm.left{
+    left:-12px;
   }
 
-  .court {
-    width: 88%;
+  .palm.right{
+    right:-12px;
+    transform:scale(.62);
   }
 
-  .dialogue {
-    bottom: 3%;
+  .player{
+    transform:translateX(-50%) scale(.83);
+    transform-origin:bottom center;
+    bottom:7%;
   }
 
-  .bubble {
-    font-size: 15px;
+  .smallPlayer.one{
+    left:18%;
   }
 
-  .choice {
-    font-size: 14px;
+  .smallPlayer.two{
+    right:18%;
+  }
+
+  .dialogue{
+    bottom:2%;
+    padding:13px 14px 11px;
+  }
+
+  .dialogueText{
+    font-size:15px;
+    margin-bottom:8px;
+  }
+
+  .choice{
+    font-size:13px;
+    padding:8px;
   }
 }
 </style>
@@ -999,27 +1262,22 @@ body {
 
 <body>
 
-<div class="scene" id="scene">
+<!-- =========================
+     PORTE
+========================= -->
 
-  <!-- =====================================
-       PORTE
-  ====================================== -->
+<section id="doorScreen">
 
-  <div class="door-scene">
+  <div class="doorScene">
 
-    <div class="door-title">
+    <div class="doorQuestion">
       <h1>Tu veux entrer ?</h1>
       <p>Alors ouvre la porte...</p>
     </div>
 
-    <div class="door">
+    <div class="door" id="door">
 
-      <div class="door-panel top"></div>
-      <div class="door-panel bottom"></div>
-
-      <div class="handle"></div>
-
-      <div class="open-text">
+      <div class="doorText">
         Clique ici
       </div>
 
@@ -1027,190 +1285,205 @@ body {
 
   </div>
 
+</section>
 
-  <!-- =====================================
-       STADE
-  ====================================== -->
 
-  <div class="tennis-scene">
+<!-- =========================
+     STADE
+========================= -->
 
-    <div class="sky"></div>
+<section id="stadium">
 
-    <div class="sun"></div>
+  <div class="sky"></div>
 
-    <!-- végétation -->
+  <div class="sun"></div>
 
-    <div class="palm palm-left">🌴</div>
-    <div class="palm palm-right">🌴</div>
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
 
-    <div class="palm-small-left">🌴</div>
-    <div class="palm-small-right">🌴</div>
+  <div class="ground"></div>
 
-    <div class="garden"></div>
+  <div class="garden"></div>
 
-    <!-- fleurs -->
 
-    <div class="flower-border top">
-      🌸 🌿 🌸 🌿 🌸 🌿 🌸 🌿 🌸
+  <!-- PALMIER GAUCHE -->
+
+  <div class="palm left">
+
+    <div class="palmTrunk"></div>
+
+    <div class="palmLeaves">
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
     </div>
 
-    <div class="flower-border left">
-      🌸 🌿 🌸 🌿 🌸 🌿
+  </div>
+
+
+  <!-- PALMIER DROIT -->
+
+  <div class="palm right">
+
+    <div class="palmTrunk"></div>
+
+    <div class="palmLeaves">
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
     </div>
 
-    <div class="flower-border right">
-      🌿 🌸 🌿 🌸 🌿 🌸
+  </div>
+
+
+  <div class="stadiumBack"></div>
+
+  <div class="stadiumRail"></div>
+
+
+  <div class="clubSign">
+    TENNIS CLUB
+  </div>
+
+
+  <!-- ZONE TURQUOISE -->
+
+  <div class="turquoiseArea"></div>
+
+
+  <!-- COURT -->
+
+  <div class="court">
+
+    <div class="courtLine lineTop"></div>
+    <div class="courtLine lineMiddle"></div>
+    <div class="courtLine lineBottom"></div>
+    <div class="courtLine sideLeft"></div>
+    <div class="courtLine sideRight"></div>
+
+    <div class="net"></div>
+
+  </div>
+
+
+  <!-- FLEURS -->
+
+  <div class="flowers">
+    <div class="flower">🌷</div>
+    <div class="flower">🌸</div>
+    <div class="flower">🌼</div>
+    <div class="flower">🌷</div>
+    <div class="flower">🌸</div>
+  </div>
+
+
+  <!-- JOUEUR GAUCHE -->
+
+  <div class="smallPlayer one">
+
+    <div class="smallHead"></div>
+    <div class="smallBody"></div>
+    <div class="smallLeg1"></div>
+    <div class="smallLeg2"></div>
+
+  </div>
+
+
+  <!-- JOUEUR DROIT -->
+
+  <div class="smallPlayer two">
+
+    <div class="smallHead"></div>
+    <div class="smallBody"></div>
+    <div class="smallLeg1"></div>
+    <div class="smallLeg2"></div>
+
+  </div>
+
+
+  <!-- JOUEUR PRINCIPAL -->
+
+  <div class="player">
+
+    <div class="playerHair"></div>
+
+    <div class="cap"></div>
+
+    <div class="playerHead"></div>
+
+    <div class="playerNeck"></div>
+
+    <div class="playerBody"></div>
+
+    <div class="playerArmLeft"></div>
+
+    <div class="playerArmRight"></div>
+
+    <div class="playerLegLeft">
+      <div class="shoe"></div>
     </div>
 
-    <!-- panneau -->
-
-    <div class="club-sign">
-      TENNIS CLUB
-    </div>
-
-
-    <!-- COURT -->
-
-    <div class="court-area">
-
-      <div class="court">
-
-        <div class="court-lines"></div>
-
-        <div class="center-line"></div>
-
-        <div class="service-top"></div>
-        <div class="service-bottom"></div>
-
-      </div>
-
-      <!-- filet -->
-
-      <div class="net">
-        <div class="net-post-left"></div>
-        <div class="net-post-right"></div>
-      </div>
-
-      <!-- balles -->
-
-      <div class="ball one"></div>
-      <div class="ball two"></div>
-
-
-      <!-- joueur principal -->
-
-      <div class="main-player">
-
-        <div class="body">
-
-          <div class="head"></div>
-          <div class="hair"></div>
-
-          <div class="shorts"></div>
-
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-
-          <div class="leg left"></div>
-          <div class="leg right"></div>
-
-        </div>
-
-        <div class="racket">
-
-          <div class="racket-head"></div>
-          <div class="racket-handle"></div>
-
-        </div>
-
-      </div>
-
-
-      <!-- joueur loin gauche -->
-
-      <div class="far-player left">
-
-        <div class="body">
-
-          <div class="head"></div>
-          <div class="hair"></div>
-
-          <div class="shorts"></div>
-
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-
-          <div class="leg left"></div>
-          <div class="leg right"></div>
-
-        </div>
-
-      </div>
-
-
-      <!-- joueur loin droite -->
-
-      <div class="far-player right">
-
-        <div class="body">
-
-          <div class="head"></div>
-          <div class="hair"></div>
-
-          <div class="shorts"></div>
-
-          <div class="arm left"></div>
-          <div class="arm right"></div>
-
-          <div class="leg left"></div>
-          <div class="leg right"></div>
-
-        </div>
-
-      </div>
-
+    <div class="playerLegRight">
+      <div class="shoe"></div>
     </div>
 
 
-    <!-- =====================================
-         DIALOGUE
-    ====================================== -->
+    <!-- RAQUETTE -->
 
-    <div class="dialogue">
+    <div class="racket">
 
-      <div class="bubble">
-        Bon… maintenant que t’es là…<br>
-        qu’est-ce que tu cherches ?
-      </div>
+      <div class="racketHead"></div>
 
-      <div class="choices">
+      <div class="racketBridge"></div>
 
-        <button class="choice" onclick="showAnswer(1)">
-          ♡ Peut-être toi.
-        </button>
+      <div class="racketHandle"></div>
 
-        <button class="choice" onclick="showAnswer(2)">
-          🎾 Je regardais juste le match... (espionnage 🙂)
-        </button>
-
-      </div>
+      <div class="racketGrip"></div>
 
     </div>
 
   </div>
 
 
-  <!-- =====================================
-       RÉPONSES
-  ====================================== -->
+  <!-- DIALOGUE -->
 
-  <div class="answer" id="answer">
+  <div class="dialogue">
 
-    <div class="answer-box">
+    <div class="dialogueText">
+      Bon… maintenant que t’es là…<br>
+      qu’est-ce que tu cherches ?
+    </div>
 
-      <p id="answerText"></p>
+    <div class="choices">
 
-      <button class="close-answer" onclick="closeAnswer()">
+      <button class="choice" onclick="showResponse(1)">
+        ♡ « Peut-être toi. »
+      </button>
+
+      <button class="choice" onclick="showResponse(2)">
+        🎾 « Je regardais juste le match... (espionnage 🙂) »
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- REPONSE -->
+
+  <div class="response" id="response">
+
+    <div class="responseBox">
+
+      <p id="responseText"></p>
+
+      <button class="closeBtn" onclick="closeResponse()">
         Retour
       </button>
 
@@ -1218,38 +1491,69 @@ body {
 
   </div>
 
-</div>
+</section>
 
 
 <script>
 
-const scene = document.getElementById("scene");
-const door = document.querySelector(".door");
-const answerText = document.getElementById("answerText");
+const door = document.getElementById("door");
 
-door.addEventListener("click", function () {
-  scene.classList.add("open");
+const doorScreen =
+  document.getElementById("doorScreen");
+
+const stadium =
+  document.getElementById("stadium");
+
+
+door.addEventListener("click",function(){
+
+  door.style.transform =
+    "perspective(1000px) rotateY(-105deg)";
+
+  setTimeout(function(){
+
+    doorScreen.style.opacity="0";
+
+    doorScreen.style.visibility="hidden";
+
+    stadium.classList.add("show");
+
+  },850);
+
 });
 
-function showAnswer(choice) {
 
-  if (choice === 1) {
+function showResponse(choice){
 
-    answerText.textContent =
+  const response =
+    document.getElementById("response");
+
+  const text =
+    document.getElementById("responseText");
+
+
+  if(choice===1){
+
+    text.textContent =
       "Ça serait mieux de m’envoyer un message alors !";
 
-  } else {
+  }else{
 
-    answerText.textContent =
+    text.textContent =
       "Espionnage ? Bah… c’est le temps de partir alors.";
 
   }
 
-  scene.classList.add("show-answer");
+
+  response.style.display="flex";
 }
 
-function closeAnswer() {
-  scene.classList.remove("show-answer");
+
+function closeResponse(){
+
+  document.getElementById("response")
+    .style.display="none";
+
 }
 
 </script>
